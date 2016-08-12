@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">AppStroke</string>
     <string name="action_settings">Settings</string>
+    <string name="mainpage_toolbar_logo_desc">AppStroke Logo</string>
+    <string name="mainpage_toolbar_title">App Stroke</string>
+    <string name="dummy_text_3_paragraph">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis neque id dui fermentum, eget mattis nisi rhoncus. Nam quis turpis tristique, euismod libero eu, euismod dui. Etiam dignissim volutpat felis vitae consectetur. Duis ut dictum eros. Vivamus ornare sagittis enim, nec efficitur felis molestie ac. Mauris consectetur enim quis neque cursus, vitae dapibus massa mollis. Sed bibendum laoreet dui, ac facilisis risus suscipit sit amet. Etiam et hendrerit mauris. Fusce id lorem lacus.\n\n\tVivamus consequat mi lorem, quis vestibulum tortor laoreet a. Ut lectus risus, pretium sed sagittis vel, posuere at mauris. Mauris consectetur tempor libero eget dictum. Donec laoreet lectus non lectus imperdiet feugiat. Sed id justo purus. Donec et nunc mattis, pellentesque ante vitae, rhoncus est. Sed ultricies, nisi non facilisis aliquam, sapien ex laoreet sapien, eget rhoncus nunc augue in erat. Praesent imperdiet urna nec ex gravida fermentum. Integer non volutpat ligula, vitae congue tellus. Sed eu porttitor risus, et imperdiet augue. Suspendisse enim nibh, dignissim at nulla sodales, accumsan sagittis magna. Aliquam nisl ligula, facilisis et nunc in, interdum porta augue. Praesent erat sem, porta in eros in, ullamcorper ornare augue.\n\n\tAliquam sem sapien, finibus sit amet est eu, porttitor vulputate dui. Mauris gravida eu tellus vel convallis. Donec tortor nibh, ornare ut velit consequat, egestas fringilla quam. Fusce scelerisque tincidunt arcu sed tempus. Praesent rutrum commodo orci, sit amet convallis odio dictum nec. Cras consectetur ex orci, sed porttitor ex dignissim eu. Nunc rhoncus, enim vel convallis dignissim, mi magna aliquam purus, in pretium purus orci quis risus. Nam dictum sit amet risus at pellentesque. In luctus, leo non commodo sagittis, ipsum felis imperdiet tellus, ac ultrices urna turpis hendrerit tortor. Quisque fermentum nunc ante, id malesuada nisl porta id. Proin placerat, odio eu ultrices tristique, quam augue malesuada magna, sit amet convallis mi diam at metus. Donec pulvinar, felis quis sodales consequat, lectus sem consectetur magna, nec laoreet lacus leo a felis. Aenean a erat nec felis molestie placerat sed non ex. Sed et ullamcorper erat, nec molestie nulla. Etiam quis fermentum magna. Aenean id nisl nec risus porttitor egestas sit amet sed leo.</string>
+    <string name="mainpage_viewpager_home_logo_description">Logo Description</string>
+    <string name="dummy_text_title">Dummy Title</string>
+    <string name="mainpage_viewpager_diagnose_question_title">Input your health data here !</string>
+    <string name="mainpage_viewpager_diagnose_label_age">Age</string>
+    <string name="mainpage_viewpager_diagnose_label_cholesterol">Cholesterol</string>
+    <string name="mainpage_viewpager_diagnose_label_hdl">HDL</string>
+    <string name="mainpage_viewpager_diagnose_label_ldl">LDL</string>
+    <string name="mainpage_viewpager_diagnose_label_triglyceride">Triglyceride</string>
+    <string name="mainpage_viewpager_diagnose_button_submit">Calculate</string>
+    <string name="mainpage_viewpager_diagnose_button_showresult">Show Previous Result</string>
+    <string name="mainpage_viewpager_diagnose_result_content_label_cry">Cry</string>
+    <string name="mainpage_viewpager_diagnose_result_content_label_smile">Smile</string>
+    <string name="mainpage_viewpager_diagnose_result_content_label_sad">Sad</string>
+    <string name="mainpage_viewpager_diagnose_result_header_label_result_title">Diagnose Result</string>
+    <string name="mainpage_viewpager_diagnose_result_header_button_dismiss">Close</string>
+    <string name="mainpage_viewpager_diagnose_result_footer_button_to_treatment">Go to Treatment</string>
+    <string name="mainpage_viewpager_diagnose_result_footer_label_info">Ps : You can check result detail on \"Treatment\" Page</string>
 </resources>
