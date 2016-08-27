@@ -10,13 +10,6 @@
     tools:context="id.ac.ub.filkom.sekcv.appstroke.MainPage"
     tools:showIn="@layout/mainpage_container">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/sliding_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:tabMode="scrollable"/>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
