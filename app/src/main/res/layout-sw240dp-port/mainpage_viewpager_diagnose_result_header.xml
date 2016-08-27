@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:text="@string/mainpage_viewpager_diagnose_result_header_label_result_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="4dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/mainpage_viewpager_diagnose_result_header_button_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/mainpage_viewpager_diagnose_result_header_button_icon_dismiss"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/mainpage_viewpager_diagnose_result_header_button_icon_dismiss"
+            android:gravity="center_vertical"
+            android:paddingEnd="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingStart="4dp"
+            android:text="@string/mainpage_viewpager_diagnose_result_header_button_dismiss"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!--    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+        </LinearLayout>-->
+
+</LinearLayout>
