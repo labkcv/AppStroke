@@ -8,35 +8,36 @@ For amazing form @see : https://github.com/rengwuxian/MaterialEditText-->
               android:orientation="vertical"
               android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/mainpage_viewpager_diagnose_title_icon"
-        android:drawablePadding="12dp"
-        android:drawableStart="@drawable/mainpage_viewpager_diagnose_title_icon"
-        android:gravity="center_vertical"
-        android:padding="4dp"
-        android:text="@string/mainpage_viewpager_diagnose_question_title"
-        android:textSize="18sp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary">
-    </RelativeLayout>
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/mainpage_viewpager_diagnose_title_icon"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/mainpage_viewpager_diagnose_title_icon"
+                android:gravity="center_vertical"
+                android:padding="4dp"
+                android:text="@string/mainpage_viewpager_diagnose_question_title"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorPrimary">
+            </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
