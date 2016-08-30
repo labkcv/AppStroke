@@ -11,22 +11,37 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+
 import butterknife.ButterKnife;
+import id.ac.ub.filkom.sekcv.appstroke.controller.MainPageContentAdapter;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
 
 public class MainPage extends AppCompatActivity
 {
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private User      user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.mainpage_container);
+        JodaTimeAndroid.init(this);
         ButterKnife.bind(this);
 
+        this.setDummyUser();
         this.setToolbar();
         this.setActivity(super.getResources().getConfiguration().orientation, 0);
+    }
+
+    private void setDummyUser()
+    {
+        this.user = new User(1, LocalDate.parse("1993-12-16"), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
     }
 
     private void setToolbar()
@@ -86,6 +101,38 @@ public class MainPage extends AppCompatActivity
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
+                final MainPageContentAdapter pagerAdapter = new MainPageContentAdapter(getSupportFragmentManager(), 1);
+                pagerAdapter.addFragment(Diagnose.newInstance("Diagnose", this.user.getId()));
+
+                this.viewPager = (ViewPager) findViewById(R.id.viewpager);
+                viewPager.setAdapter(pagerAdapter);
+
+                // Give the TabLayout the ViewPager
+                this.tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+
+                tabLayout.setupWithViewPager(viewPager);
+                Log.d("OrientationChanged", "Create Portrait");
+            }
+            break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+            {
+                this.viewPager = (ViewPager) findViewById(R.id.viewpager);
+                viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(), this));
+
+                // Give the TabLayout the ViewPager
+                this.tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+                tabLayout.setupWithViewPager(viewPager);
+                Log.d("OrientationChanged", "Create Landscape");
+            }
+        }
+        viewPager.setCurrentItem(tabNumber);
+    }
+    /*public void setActivity(final int orientation, final int tabNumber)
+    {
+        switch (orientation)
+        {
+            case Configuration.ORIENTATION_PORTRAIT:
+            {
                 this.viewPager = (ViewPager) findViewById(R.id.viewpager);
                 viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(), this));
 
@@ -108,5 +155,5 @@ public class MainPage extends AppCompatActivity
             }
         }
         viewPager.setCurrentItem(tabNumber);
-    }
+    }*/
 }

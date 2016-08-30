@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppStroke</string>
+    <string name="test_validator">Test ID Validator</string>
+    <string name="mainpage_viewpager_diagnose_validator_nonempty">Form tidak boleh kosong !</string>
+    <string name="mainpage_viewpager_diagnose_validator_numerical">Nilai error !</string>
+    <string name="mainpage_viewpager_diagnose_validator_range" formatted="false">Nilai harus lebih dari %s dan kurang dari %s !</string>
+    <string name="mainpage_viewpager_diagnose_result_content_label_danger">Mengkhawatirkan</string>
+    <string name="mainpage_viewpager_diagnose_result_content_label_high">Rentan</string>
+</resources>
