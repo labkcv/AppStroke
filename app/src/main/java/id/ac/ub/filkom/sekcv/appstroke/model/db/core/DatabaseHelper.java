@@ -20,7 +20,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final int    DATABASE_VERSION = 1;
     public static final String DATABASE_NAME    = "641202b9031ae1995e177280f689621989f7b03d.mcrypt";
 
-    public static final String DATE_FORMAT = "YYYY-MM-DD";
+    public static final String DATE_FORMAT      = "yyyy-MM-dd";
+    public static final String TIME_FORMAT      = "HH:mm:ss";
+    public static final String TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     private static final char COMMA_SEPARATOR = ',';
     private static final char WHITESPACE      = ' ';
