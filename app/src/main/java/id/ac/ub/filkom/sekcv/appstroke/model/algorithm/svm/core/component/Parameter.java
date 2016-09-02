@@ -3,34 +3,28 @@ package id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component;
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component> created by :
  * Name         : syafiq
- * Date / Time  : 30 August 2016, 12:21 AM.
+ * Date / Time  : 30 August 2016, 11:08 AM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class Parameter
+public enum Parameter
 {
-    private static Parameter ourInstance = new Parameter();
-    private final id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter[] parameters;
+    AGE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("age", "Age")),
+    CHOLESTEROL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("cholesterol", "Cholesterol")),
+    HDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("hdl", "HDL")),
+    LDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("ldl", "LDL")),
+    TRIGLYCERIDE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("triglyceride", "Triglyceride"));
 
-    private Parameter()
+    private final id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter parameter;
+
+    Parameter(id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter parameter)
     {
-        parameters = new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter[]
-                {
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("age", "Age"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("cholesterol", "Cholesterol"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("hdl", "HDL"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("ldl", "LDL"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("triglyceride", "Triglyceride")
-                };
+        this.parameter = parameter;
     }
 
-    public static Parameter getInstance()
+    public id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter getParameter()
     {
-        return ourInstance;
+        return parameter;
     }
 
-    public id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter[] getParameters()
-    {
-        return parameters;
-    }
 }
