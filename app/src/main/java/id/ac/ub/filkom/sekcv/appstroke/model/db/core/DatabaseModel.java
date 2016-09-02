@@ -26,11 +26,26 @@ public class DatabaseModel
 
     public void open() throws SQLException
     {
-        this.database = this.dbHelper.getWritableDatabase();
+        if(!this.isDatabaseReady())
+        {
+            this.database = this.dbHelper.getWritableDatabase();
+        }
     }
 
     public void close()
     {
         this.dbHelper.close();
+    }
+
+    public boolean isDatabaseReady()
+    {
+        if(this.database != null)
+        {
+            return this.database.isOpen();
+        }
+        else
+        {
+            return false;
+        }
     }
 }
