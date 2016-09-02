@@ -3,32 +3,25 @@ package id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component;
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component> created by :
  * Name         : syafiq
- * Date / Time  : 30 August 2016, 12:37 AM.
+ * Date / Time  : 30 August 2016, 11:55 AM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class Status
+public enum Status
 {
-    private static Status ourInstance = new Status();
-    private final id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status[] statuses;
+    NORMAL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("normal", "Normal")),
+    HIGH(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("rentan", "Rentan")),
+    DANGER(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("mengkhawatirkan", "Mengkhawatirkan"));
 
-    private Status()
+    private final id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status status;
+
+    Status(id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status status)
     {
-        statuses = new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status[]
-                {
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("normal", "Normal"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("rentan", "Rentan"),
-                        new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status("mengkhawatirkan", "Mengkhawatirkan"),
-                };
+        this.status = status;
     }
 
-    public static Status getInstance()
+    public id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status getStatus()
     {
-        return ourInstance;
-    }
-
-    public id.ac.ub.filkom.sekcv.appstroke.model.dataset.Status[] getStatuses()
-    {
-        return statuses;
+        return status;
     }
 }
