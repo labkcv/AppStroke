@@ -1,4 +1,4 @@
-package id.ac.ub.filkom.sekcv.appstroke.controller;
+package id.ac.ub.filkom.sekcv.appstroke.controller.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
