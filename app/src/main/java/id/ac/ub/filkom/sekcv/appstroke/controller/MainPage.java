@@ -1,5 +1,8 @@
-package id.ac.ub.filkom.sekcv.appstroke;
+package id.ac.ub.filkom.sekcv.appstroke.controller;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,22 +14,60 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+
 import butterknife.ButterKnife;
+import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.MainPageContentAdapter;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Home;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
 
 public class MainPage extends AppCompatActivity
 {
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private User      user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.mainpage_container);
+
+
+        JodaTimeAndroid.init(this);
         ButterKnife.bind(this);
 
+        this.setDummyUser();
         this.setToolbar();
         this.setActivity(super.getResources().getConfiguration().orientation, 0);
+    }
+
+    private void setDummyUser()
+    {
+        Context con;
+        try
+        {
+            con = super.createPackageContext("com.labkcv.selabkc", 0);
+            SharedPreferences pref = con.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
+            Log.d("PREF DATA", pref.getString("date", "date"));
+            Log.d("PREF DATA", pref.getString("name", "name"));
+            Log.d("PREF DATA", pref.getString("password", "password"));
+            Log.d("PREF DATA", pref.getString("email", "email"));
+            Log.d("PREF DATA1", LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")).toString());
+            this.user = new User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
+
+        }
+        catch(PackageManager.NameNotFoundException e)
+        {
+            Log.e("Not data shared", e.toString());
+            this.user = new User(1, LocalDate.parse("1993-12-16"), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+        }
     }
 
     private void setToolbar()
@@ -86,8 +127,13 @@ public class MainPage extends AppCompatActivity
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
+                final MainPageContentAdapter pagerAdapter = new MainPageContentAdapter(getSupportFragmentManager(), 3);
+                pagerAdapter.addFragment(Home.newInstance("Home"));
+                pagerAdapter.addFragment(Diagnose.newInstance("Diagnose", this.user.getId()));
+                pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record", this.user.getId()));
+
                 this.viewPager = (ViewPager) findViewById(R.id.viewpager);
-                viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(), this));
+                viewPager.setAdapter(pagerAdapter);
 
                 // Give the TabLayout the ViewPager
                 this.tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -98,13 +144,6 @@ public class MainPage extends AppCompatActivity
             break;
             case Configuration.ORIENTATION_LANDSCAPE:
             {
-                this.viewPager = (ViewPager) findViewById(R.id.viewpager);
-                viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(), this));
-
-                // Give the TabLayout the ViewPager
-                this.tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-                tabLayout.setupWithViewPager(viewPager);
-                Log.d("OrientationChanged", "Create Landscape");
             }
         }
         viewPager.setCurrentItem(tabNumber);

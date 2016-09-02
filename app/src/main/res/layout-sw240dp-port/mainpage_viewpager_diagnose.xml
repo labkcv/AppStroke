@@ -1,36 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-This page use native form
-For amazing form @see : https://github.com/rengwuxian/MaterialEditText-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/mainpage_viewpager_diagnose_title_icon"
-        android:drawablePadding="12dp"
-        android:drawableStart="@drawable/mainpage_viewpager_diagnose_title_icon"
-        android:gravity="center_vertical"
-        android:padding="4dp"
-        android:text="@string/mainpage_viewpager_diagnose_question_title"
-        android:textSize="18sp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary">
-    </RelativeLayout>
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -38,85 +18,133 @@ For amazing form @see : https://github.com/rengwuxian/MaterialEditText-->
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/mainpage_viewpager_diagnose_title_icon"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/mainpage_viewpager_diagnose_title_icon"
+                    android:gravity="center_vertical"
+                    android:padding="4dp"
+                    android:text="@string/mainpage_viewpager_diagnose_question_title"
+                    android:textSize="18sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorAccent">
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mainpage_viewpager_diagnose_edittext_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="24dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:digits="0123456789"
+                android:enabled="false"
+                android:focusable="false"
+                android:hint="@string/mainpage_viewpager_diagnose_label_age"
+                android:inputType="numberSigned"
+                app:met_errorColor="@color/custom_material_red_accent_400"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/mainpage_viewpager_diagnose_label_age"
+                app:met_floatingLabelTextColor="@color/custom_material_grey_600"
+                app:met_helperText="@string/mainpage_viewpager_diagnose_label_age_helper"
+                app:met_helperTextColor="@color/custom_material_grey_600"
+                app:met_maxCharacters="3"
+                app:met_minCharacters="1"
+                app:met_underlineColor="@color/colorPrimary"/>
 
-                <EditText
-                    android:id="@+id/mainpage_viewpager_diagnose_edittext_age"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mainpage_viewpager_diagnose_label_age"
-                    android:inputType="textCapWords"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mainpage_viewpager_diagnose_edittext_cholesterol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="@string/mainpage_viewpager_diagnose_label_cholesterol"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                app:met_errorColor="@color/custom_material_red_accent_400"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/mainpage_viewpager_diagnose_label_cholesterol"
+                app:met_floatingLabelTextColor="@color/custom_material_grey_600"
+                app:met_helperText="@string/mainpage_viewpager_diagnose_label_cholesterol_helper"
+                app:met_helperTextColor="@color/custom_material_grey_600"
+                app:met_maxCharacters="3"
+                app:met_minCharacters="1"
+                app:met_underlineColor="@color/colorPrimary"/>
 
-                <EditText
-                    android:id="@+id/mainpage_viewpager_diagnose_edittext_cholesterol"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mainpage_viewpager_diagnose_label_cholesterol"
-                    android:inputType="textCapWords"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mainpage_viewpager_diagnose_edittext_hdl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="@string/mainpage_viewpager_diagnose_label_hdl"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                app:met_errorColor="@color/custom_material_red_accent_400"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/mainpage_viewpager_diagnose_label_hdl"
+                app:met_floatingLabelTextColor="@color/custom_material_grey_600"
+                app:met_helperText="@string/mainpage_viewpager_diagnose_label_hdl_helper"
+                app:met_helperTextColor="@color/custom_material_grey_600"
+                app:met_maxCharacters="3"
+                app:met_minCharacters="1"
+                app:met_underlineColor="@color/colorPrimary"/>
 
-                <EditText
-                    android:id="@+id/mainpage_viewpager_diagnose_edittext_hdl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mainpage_viewpager_diagnose_label_hdl"
-                    android:inputType="textCapWords"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mainpage_viewpager_diagnose_edittext_ldl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="@string/mainpage_viewpager_diagnose_label_ldl"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                app:met_errorColor="@color/custom_material_red_accent_400"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/mainpage_viewpager_diagnose_label_ldl"
+                app:met_floatingLabelTextColor="@color/custom_material_grey_600"
+                app:met_helperText="@string/mainpage_viewpager_diagnose_label_ldl_helper"
+                app:met_helperTextColor="@color/custom_material_grey_600"
+                app:met_maxCharacters="3"
+                app:met_minCharacters="1"
+                app:met_underlineColor="@color/colorPrimary"/>
 
-                <EditText
-                    android:id="@+id/mainpage_viewpager_diagnose_edittext_ldl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mainpage_viewpager_diagnose_label_ldl"
-                    android:inputType="textCapWords"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mainpage_viewpager_diagnose_edittext_triglyceride"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:hint="@string/mainpage_viewpager_diagnose_label_triglyceride"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                app:met_errorColor="@color/custom_material_red_accent_400"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/mainpage_viewpager_diagnose_label_triglyceride"
+                app:met_floatingLabelTextColor="@color/custom_material_grey_600"
+                app:met_helperText="@string/mainpage_viewpager_diagnose_label_triglyceride_helper"
+                app:met_helperTextColor="@color/custom_material_grey_600"
+                app:met_maxCharacters="3"
+                app:met_minCharacters="1"
+                app:met_underlineColor="@color/colorPrimary"/>
 
-                <EditText
-                    android:id="@+id/mainpage_viewpager_diagnose_edittext_triglyceride"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mainpage_viewpager_diagnose_label_triglyceride"
-                    android:inputType="textCapWords"/>
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/mainpage_viewpager_diagnose_button_calculate"
@@ -124,7 +152,6 @@ For amazing form @see : https://github.com/rengwuxian/MaterialEditText-->
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:padding="12dp"
                 android:text="@string/mainpage_viewpager_diagnose_button_submit"/>
@@ -135,7 +162,6 @@ For amazing form @see : https://github.com/rengwuxian/MaterialEditText-->
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="4dp"
-                android:layout_weight="1"
                 android:background="@color/transparent"
                 android:padding="12dp"
                 android:text="@string/mainpage_viewpager_diagnose_button_showresult"
