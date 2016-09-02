@@ -567,7 +567,7 @@ public class SVM
     {
         final double[] kernel   = new double[this.training.length];
         final double[] variance = this.variance;
-        for(int trainingIndex = -1, trainingSize = this.training.length, parameterSize = id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter.getInstance().getParameters().length; ++trainingIndex < trainingSize; )
+        for(int trainingIndex = -1, trainingSize = this.training.length, parameterSize = id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter.values().length; ++trainingIndex < trainingSize; )
         {
             final double[] training = this.training[trainingIndex].getParameter();
             double         value    = 1;
