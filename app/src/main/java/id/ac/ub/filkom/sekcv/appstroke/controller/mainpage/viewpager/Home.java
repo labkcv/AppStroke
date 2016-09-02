@@ -23,7 +23,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.Title
 public class Home extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.Home";
-    public static final int    ID  = 0x10001;
+    public static final int    ID  = 0b000;
 
     private Unbinder unbinder;
 

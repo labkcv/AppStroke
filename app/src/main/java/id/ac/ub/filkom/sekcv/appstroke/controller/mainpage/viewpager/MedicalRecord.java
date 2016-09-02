@@ -36,7 +36,7 @@ import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 public class MedicalRecord extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.MedicalRecord";
-    public static final int    ID  = 0x10011;
+    public static final int    ID  = 0b010;
 
     private static final String USER_ID_TAG = "MedicalRecord.userID";
 
