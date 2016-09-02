@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.SVM;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
@@ -58,7 +59,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose.RangeVa
 public class Diagnose extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.Diagnose";
-    public static final int    ID  = 0x10010;
+    public static final int    ID  = 0b001;
 
     private static final String USER_ID_TAG = "Diagnose.userID";
     public                                                            TextView         resultText;
@@ -513,6 +514,8 @@ public class Diagnose extends TitledFragment
     private void onGoToTreatmentPressed()
     {
         Log.i("Diagnose", "controller.mainpage.viewpager.Diagnose.onGoToTreatmentPressed");
+        this.resultDialog.dismiss();
+        ((MainPage) getActivity()).getViewPager().setCurrentItem(Home.ID);
     }
 
     public void onDialogDissmissPressed()
