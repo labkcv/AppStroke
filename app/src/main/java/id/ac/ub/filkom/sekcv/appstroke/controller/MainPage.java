@@ -25,6 +25,7 @@ import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.MainPageContentAdapter
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Home;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.dataset.Stroke;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
 
 public class MainPage extends AppCompatActivity
@@ -32,6 +33,7 @@ public class MainPage extends AppCompatActivity
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private User      user;
+    private Stroke    stroke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,12 +45,12 @@ public class MainPage extends AppCompatActivity
         JodaTimeAndroid.init(this);
         ButterKnife.bind(this);
 
-        this.setDummyUser();
+        this.setUser();
         this.setToolbar();
         this.setActivity(super.getResources().getConfiguration().orientation, 0);
     }
 
-    private void setDummyUser()
+    private void setUser()
     {
         Context con;
         try
