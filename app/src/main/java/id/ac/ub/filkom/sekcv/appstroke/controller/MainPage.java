@@ -75,7 +75,7 @@ public class MainPage extends AppCompatActivity
         final Toolbar toolbar = (Toolbar) super.findViewById(R.id.mainpage_toolbar);
         super.setSupportActionBar(toolbar);
         final ActionBar actionBar = super.getSupportActionBar();
-        if (actionBar != null)
+        if(actionBar != null)
         {
             actionBar.setDisplayShowTitleEnabled(false);
             toolbar.setContentInsetStartWithNavigation(0);
@@ -99,7 +99,7 @@ public class MainPage extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if(id == R.id.action_settings)
         {
             return true;
         }
@@ -123,7 +123,7 @@ public class MainPage extends AppCompatActivity
 
     public void setActivity(final int orientation, final int tabNumber)
     {
-        switch (orientation)
+        switch(orientation)
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
@@ -147,5 +147,10 @@ public class MainPage extends AppCompatActivity
             }
         }
         viewPager.setCurrentItem(tabNumber);
+    }
+
+    public ViewPager getViewPager()
+    {
+        return viewPager;
     }
 }
