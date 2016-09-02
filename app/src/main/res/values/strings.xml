@@ -14,9 +14,9 @@
     <string name="mainpage_viewpager_diagnose_label_triglyceride">Triglyceride</string>
     <string name="mainpage_viewpager_diagnose_button_submit">Calculate</string>
     <string name="mainpage_viewpager_diagnose_button_showresult">Show Previous Result</string>
-    <string name="mainpage_viewpager_diagnose_result_content_label_danger">Danger</string>
-    <string name="mainpage_viewpager_diagnose_result_content_label_normal" translatable="false">Normal</string>
-    <string name="mainpage_viewpager_diagnose_result_content_label_high">High</string>
+    <string name="mainpage_viewpager_medical_record_status_danger">Danger</string>
+    <string name="mainpage_viewpager_medical_record_status_normal" translatable="false">Normal</string>
+    <string name="mainpage_viewpager_medical_record_status_high">High</string>
     <string name="mainpage_viewpager_diagnose_result_header_label_result_title">Diagnose Result</string>
     <string name="mainpage_viewpager_diagnose_result_header_button_dismiss">Close</string>
     <string name="mainpage_viewpager_diagnose_result_footer_button_to_treatment">Go to Treatment</string>
@@ -30,5 +30,14 @@
     <string name="mainpage_viewpager_diagnose_validator_nonempty">Field cannot be empty !</string>
     <string name="mainpage_viewpager_diagnose_validator_numerical">Invalid number !</string>
     <string name="mainpage_viewpager_diagnose_validator_range" formatted="false">Value must greater than %s and less than %s !</string>
-    <string name="mainpage_viewpager_diagnose_label_error_db">Cannot initialize database, now exiting !</string>
+    <string name="mainpage_viewpager_label_error_db">Cannot initialize database, now exiting !</string>
+    <string name="mainpage_viewpager_medical_record_label_cholesterol">Cholesterol</string>
+    <string name="mainpage_viewpager_medical_record_label_hdl">HDL</string>
+    <string name="mainpage_viewpager_medical_record_label_ldl">LDL</string>
+    <string name="mainpage_viewpager_medical_record_label_triglyceride">Triglyceride</string>
+    <string name="mainpage_viewpager_medical_record_label_year" formatted="false">%d years old</string>
+    <string name="mainpage_viewpager_medical_record_content_description_go_to_simple">Go To Simple</string>
+    <string name="mainpage_viewpager_medical_record_content_description_detail_level">Detail Icon</string>
+    <string name="mainpage_viewpager_medical_record_content_description_go_detail">Go To Detail</string>
+    <string name="mainpage_viewpager_medical_record_content_description_simple_level">@string/mainpage_viewpager_medical_record_content_description_detail_level</string>
 </resources>
