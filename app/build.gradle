@@ -29,5 +29,9 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.orhanobut:dialogplus:1.11@aar'
     compile 'net.danlew:android.joda:2.9.4.1'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
     compile project(":MaterialEditText")
 }
