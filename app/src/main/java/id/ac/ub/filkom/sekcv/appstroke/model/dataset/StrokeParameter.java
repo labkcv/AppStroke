@@ -2,6 +2,8 @@ package id.ac.ub.filkom.sekcv.appstroke.model.dataset;
 
 import java.util.Arrays;
 
+import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter;
+
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.dataset> created by :
  * Name         : syafiq
@@ -35,27 +37,27 @@ public class StrokeParameter
 
     public int getAge()
     {
-        return (int) this.parameter[0];
+        return (int) this.parameter[Parameter.AGE.ordinal()];
     }
 
     public double getCholesterol()
     {
-        return this.parameter[1];
+        return this.parameter[Parameter.CHOLESTEROL.ordinal()];
     }
 
     public double getHdl()
     {
-        return this.parameter[2];
+        return this.parameter[Parameter.HDL.ordinal()];
     }
 
     public double getLdl()
     {
-        return this.parameter[3];
+        return this.parameter[Parameter.LDL.ordinal()];
     }
 
     public double getTriglyceride()
     {
-        return this.parameter[4];
+        return this.parameter[Parameter.TRIGLYCERIDE.ordinal()];
     }
 
     @Override
