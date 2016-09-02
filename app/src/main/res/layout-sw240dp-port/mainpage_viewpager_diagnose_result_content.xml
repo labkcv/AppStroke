@@ -13,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:drawablePadding="24dp"
         android:gravity="center_vertical"
-        android:text="@string/mainpage_viewpager_diagnose_result_content_label_danger"
+        android:text="@string/mainpage_viewpager_medical_record_status_danger"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"/>
 
