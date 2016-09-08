@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +42,7 @@ public class Treatment extends TitledFragment
     @BindView(R.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView              triglyceride;
     @BindView(R.id.mainpage_viewpager_treatment_text_view_level_status) TextView              status;
     @BindView(R.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView             icon;
-    @BindView(R.id.mainpage_viewpager_treatment_spinner_list)           MaterialBetterSpinner spinner;
+    //@BindView(R.id.mainpage_viewpager_treatment_spinner_list)           MaterialBetterSpinner spinner;
     private                                                             User                  user;
     private                                                             Stroke                stroke;
     private                                                             Unbinder              unbinder;
@@ -72,7 +72,7 @@ public class Treatment extends TitledFragment
         this.unbinder = ButterKnife.bind(this, view);
         this.getUserAccountAndData();
         this.updateStrokeDataDisplay(this.stroke);
-        this.createSpinner();
+        //this.createSpinner();
         return view;
     }
 
@@ -86,11 +86,12 @@ public class Treatment extends TitledFragment
     {
         if(stroke != null)
         {
+            final Locale          locale        = Locale.getDefault();
             final StrokeParameter medicalRecord = stroke.getParameter();
-            this.cholesterol.setText(String.format("%.4g", medicalRecord.getCholesterol()));
-            this.hdl.setText(String.format("%.4g", medicalRecord.getHdl()));
-            this.ldl.setText(String.format("%.4g", medicalRecord.getLdl()));
-            this.triglyceride.setText(String.format("%.4g", medicalRecord.getTriglyceride()));
+            this.cholesterol.setText(String.format(locale, "%.3f", medicalRecord.getCholesterol()));
+            this.hdl.setText(String.format(locale, "%.3f", medicalRecord.getHdl()));
+            this.ldl.setText(String.format(locale, "%.3f", medicalRecord.getLdl()));
+            this.triglyceride.setText(String.format(locale, "%.3f", medicalRecord.getTriglyceride()));
             this.getStatusDescription(this.status, this.icon, stroke.getMetadata().getStatus());
         }
         else
@@ -115,7 +116,7 @@ public class Treatment extends TitledFragment
         else if(status == Status.DANGER.ordinal())
         {
             statusHolder.setText(context.getResources().getString(R.string.mainpage_viewpager_medical_record_status_danger));
-            iconHolder.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.mainpage_viewpager_medical_record_simple_result_danger));
+            iconHolder.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.mainpage_viewpager_medical_record_detail_result_danger));
         }
     }
 

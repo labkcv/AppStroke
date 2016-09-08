@@ -41,4 +41,6 @@
     <string name="mainpage_viewpager_medical_record_content_description_go_detail">Go To Detail</string>
     <string name="mainpage_viewpager_medical_treatment_data_not_defined">"Data not defined, insert data first !"</string>
     <string name="mainpage_viewpager_medical_record_content_description_simple_level">@string/mainpage_viewpager_medical_record_content_description_detail_level</string>
+    <string name="dummy_text_medium">This Is Medium</string>
+    <string name="dummy_text_8_char">OOOOOOOO</string>
 </resources>
