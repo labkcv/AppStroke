@@ -39,5 +39,6 @@
     <string name="mainpage_viewpager_medical_record_content_description_go_to_simple">Go To Simple</string>
     <string name="mainpage_viewpager_medical_record_content_description_detail_level">Detail Icon</string>
     <string name="mainpage_viewpager_medical_record_content_description_go_detail">Go To Detail</string>
+    <string name="mainpage_viewpager_medical_treatment_data_not_defined">"Data not defined, insert data first !"</string>
     <string name="mainpage_viewpager_medical_record_content_description_simple_level">@string/mainpage_viewpager_medical_record_content_description_detail_level</string>
 </resources>

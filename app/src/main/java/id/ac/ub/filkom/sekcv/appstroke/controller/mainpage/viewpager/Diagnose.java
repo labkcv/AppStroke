@@ -36,10 +36,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.SVM;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
+import id.ac.ub.filkom.sekcv.appstroke.model.dataset.Stroke;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
@@ -58,9 +60,8 @@ import id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose.RangeVa
 public class Diagnose extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.Diagnose";
-    public static final int    ID  = 0x10010;
+    public static final int    ID  = 0b001;
 
-    private static final String USER_ID_TAG = "Diagnose.userID";
     public                                                            TextView         resultText;
     @BindView(R.id.mainpage_viewpager_diagnose_edittext_age)          MaterialEditText ageForm;
     @BindView(R.id.mainpage_viewpager_diagnose_edittext_cholesterol)  MaterialEditText cholesterolForm;
@@ -73,13 +74,10 @@ public class Diagnose extends TitledFragment
     private                                                           MedicalRecord    medicalRecordModel;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public static Diagnose newInstance(String title, int userID)
+    public static Diagnose newInstance(String title)
     {
         final Diagnose fragment = new Diagnose();
         fragment.setTitle(title);
-        Bundle bundle = new Bundle();
-        bundle.putInt(USER_ID_TAG, userID);
-        fragment.setArguments(bundle);
         Log.i("Diagnose", "controller.mainpage.viewpager.Diagnose.newInstace");
         return fragment;
     }
@@ -97,11 +95,12 @@ public class Diagnose extends TitledFragment
         Log.i("Diagnose", "controller.mainpage.viewpager.Diagnose.onCreateView");
         View view = inflater.inflate(R.layout.mainpage_viewpager_diagnose, container, false);
         this.unbinder = ButterKnife.bind(this, view);
+        this.getUserAccount();
         this.initializeMedicalRecordModel();
+        this.setPredefinedAge();
         this.createResultDialog();
         this.generateFieldValidator();
         this.setFormDoneAction();
-        //setDummyData(this.user.getId());
         return view;
     }
 
@@ -455,17 +454,13 @@ public class Diagnose extends TitledFragment
             {
                 super.onPostExecute(aVoid);
                 this.progressDialog.dismiss();
-                Diagnose.this.getUserAccount(Diagnose.super.getArguments().getInt(USER_ID_TAG));
-                Diagnose.this.setPredefinedAge();
-
             }
         }.execute();
     }
 
-    private void getUserAccount(int userID)
+    private void getUserAccount()
     {
-        final id.ac.ub.filkom.sekcv.appstroke.model.db.model.User userModel = new id.ac.ub.filkom.sekcv.appstroke.model.db.model.User(super.getContext());
-        this.user = userModel.getUserByID(userID);
+        this.user = ((MainPage) super.getActivity()).getUser();
     }
 
     private void generateFieldValidator()
@@ -513,6 +508,8 @@ public class Diagnose extends TitledFragment
     private void onGoToTreatmentPressed()
     {
         Log.i("Diagnose", "controller.mainpage.viewpager.Diagnose.onGoToTreatmentPressed");
+        this.resultDialog.dismiss();
+        ((MainPage) getActivity()).getViewPager().setCurrentItem(Treatment.ID);
     }
 
     public void onDialogDissmissPressed()
@@ -551,6 +548,7 @@ public class Diagnose extends TitledFragment
                 }
                 this.resultDialog.show();
                 this.medicalRecordModel.storeMedicalRecordByUser(this.user.getId(), record, metadata);
+                ((MainPage) super.getActivity()).setStrokeData(new Stroke(record, metadata));
             }
         }
         Log.i("Diagnose", "controller.mainpage.viewpager.Diagnose.onCalculatePressed");

@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.RecyclerViewAdapter;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
@@ -36,24 +37,18 @@ import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 public class MedicalRecord extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.MedicalRecord";
-    public static final int    ID  = 0x10011;
-
-    private static final String USER_ID_TAG = "MedicalRecord.userID";
+    public static final int    ID  = 0b010;
 
     private Unbinder                                                     unbinder;
     private User                                                         user;
     private id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord medicalRecordModel;
-
-    private View container;
+    private View                                                         container;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public static MedicalRecord newInstance(String title, int userID)
+    public static MedicalRecord newInstance(String title)
     {
         final MedicalRecord fragment = new MedicalRecord();
         fragment.setTitle(title);
-        Bundle bundle = new Bundle();
-        bundle.putInt(MedicalRecord.USER_ID_TAG, userID);
-        fragment.setArguments(bundle);
         Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.newInstace");
         return fragment;
     }
@@ -71,9 +66,8 @@ public class MedicalRecord extends TitledFragment
         Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onCreateView");
         this.container = inflater.inflate(R.layout.mainpage_viewpager_medical_record, container, false);
         this.unbinder = ButterKnife.bind(this, this.container);
+        this.getUserAccount();
         this.initializeMedicalRecordModel();
-        //this.getUserAccount(super.getArguments().getInt(USER_ID_TAG));
-        //this.initializeMedicalRecordData(this.container);
         return this.container;
     }
 
@@ -145,19 +139,14 @@ public class MedicalRecord extends TitledFragment
             {
                 super.onPostExecute(aVoid);
                 this.progressDialog.dismiss();
-                MedicalRecord.this.getUserAccount(MedicalRecord.super.getArguments().getInt(USER_ID_TAG));
                 MedicalRecord.this.initializeMedicalRecordData();
             }
         }.execute();
     }
 
-    private void getUserAccount(int userID)
+    private void getUserAccount()
     {
-        if(userID == 1)
-        {
-            final id.ac.ub.filkom.sekcv.appstroke.model.db.model.User userModel = new id.ac.ub.filkom.sekcv.appstroke.model.db.model.User(super.getContext());
-            this.user = userModel.getUserByID(userID);
-        }
+        this.user = ((MainPage) super.getActivity()).getUser();
     }
     //----------------------------------------------------------------------------------------------
 
