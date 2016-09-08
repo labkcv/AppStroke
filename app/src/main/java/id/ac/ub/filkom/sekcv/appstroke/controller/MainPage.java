@@ -25,6 +25,7 @@ import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.MainPageContentAdapter
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Home;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Treatment;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.Stroke;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
 
@@ -57,13 +58,7 @@ public class MainPage extends AppCompatActivity
         {
             con = super.createPackageContext("com.labkcv.selabkc", 0);
             SharedPreferences pref = con.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
-            Log.d("PREF DATA", pref.getString("date", "date"));
-            Log.d("PREF DATA", pref.getString("name", "name"));
-            Log.d("PREF DATA", pref.getString("password", "password"));
-            Log.d("PREF DATA", pref.getString("email", "email"));
-            Log.d("PREF DATA1", LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")).toString());
             this.user = new User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
-
         }
         catch(PackageManager.NameNotFoundException e)
         {
@@ -129,10 +124,11 @@ public class MainPage extends AppCompatActivity
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
-                final MainPageContentAdapter pagerAdapter = new MainPageContentAdapter(getSupportFragmentManager(), 3);
+                final MainPageContentAdapter pagerAdapter = new MainPageContentAdapter(getSupportFragmentManager(), 4);
                 pagerAdapter.addFragment(Home.newInstance("Home"));
-                pagerAdapter.addFragment(Diagnose.newInstance("Diagnose", this.user.getId()));
-                pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record", this.user.getId()));
+                pagerAdapter.addFragment(Diagnose.newInstance("Diagnose"));
+                pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record"));
+                pagerAdapter.addFragment(Treatment.newInstance("Treatment"));
 
                 this.viewPager = (ViewPager) findViewById(R.id.viewpager);
                 viewPager.setAdapter(pagerAdapter);
@@ -153,6 +149,21 @@ public class MainPage extends AppCompatActivity
 
     public ViewPager getViewPager()
     {
-        return viewPager;
+        return this.viewPager;
+    }
+
+    public User getUser()
+    {
+        return this.user;
+    }
+
+    public Stroke getStrokeData()
+    {
+        return this.stroke;
+    }
+
+    public void setStrokeData(Stroke strokeData)
+    {
+        this.stroke = strokeData;
     }
 }
