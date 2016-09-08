@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,8 +78,8 @@ public class Treatment extends TitledFragment
 
     private void createSpinner()
     {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(super.getContext(), android.R.layout.simple_dropdown_item_1line, super.getContext().getResources().getStringArray(R.array.timestamp_list));
-        this.spinner.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(super.getContext(), android.R.layout.simple_dropdown_item_1line, super.getContext().getResources().getStringArray(R.array.timestamp_list));
+        //this.spinner.setAdapter(adapter);
     }
 
     private void updateStrokeDataDisplay(final Stroke stroke)
