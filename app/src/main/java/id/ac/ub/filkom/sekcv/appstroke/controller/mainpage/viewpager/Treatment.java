@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,16 +37,18 @@ public class Treatment extends TitledFragment
 {
     public static final String TAG = "controller.mainpage.viewpager.Treatment";
     public static final int    ID  = 0b100;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_cholesterol)  TextView              cholesterol;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_hdl)          TextView              hdl;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_ldl)          TextView              ldl;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView              triglyceride;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_level_status) TextView              status;
-    @BindView(R.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView             icon;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_cholesterol)  TextView   cholesterol;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_hdl)          TextView   hdl;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_ldl)          TextView   ldl;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView   triglyceride;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_level_status) TextView   status;
+    @BindView(R.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView  icon;
+    @BindView(R.id.mainpage_viewpager_treatment_container)              ScrollView treatmentContainer;
     //@BindView(R.id.mainpage_viewpager_treatment_spinner_list)           MaterialBetterSpinner spinner;
-    private                                                             User                  user;
-    private                                                             Stroke                stroke;
-    private                                                             Unbinder              unbinder;
+    private                                                             User       user;
+    private                                                             Stroke     stroke;
+    private                                                             Unbinder   unbinder;
+    private                                                             View       container;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static Treatment newInstance(String title)
@@ -68,12 +71,12 @@ public class Treatment extends TitledFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         Log.i("Treatment", "controller.mainpage.viewpager.Treatment.onCreateView");
-        View view = inflater.inflate(R.layout.mainpage_viewpager_treatment, container, false);
-        this.unbinder = ButterKnife.bind(this, view);
+        this.container = inflater.inflate(R.layout.mainpage_viewpager_treatment, container, false);
+        this.unbinder = ButterKnife.bind(this, this.container);
         this.getUserAccountAndData();
         this.updateStrokeDataDisplay(this.stroke);
         //this.createSpinner();
-        return view;
+        return this.container;
     }
 
     private void createSpinner()
@@ -93,10 +96,33 @@ public class Treatment extends TitledFragment
             this.ldl.setText(String.format(locale, "%.3f", medicalRecord.getLdl()));
             this.triglyceride.setText(String.format(locale, "%.3f", medicalRecord.getTriglyceride()));
             this.getStatusDescription(this.status, this.icon, stroke.getMetadata().getStatus());
+            this.displayTreatment(stroke.getMetadata().getStatus());
         }
         else
         {
             Toast.makeText(super.getContext(), super.getResources().getString(R.string.mainpage_viewpager_medical_treatment_data_not_defined), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void displayTreatment(int status)
+    {
+        final LayoutInflater inflater = (LayoutInflater) super.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View                 view     = null;
+        if(status == Status.NORMAL.ordinal())
+        {
+            view = inflater.inflate(R.layout.mainpage_viewpager_treatment_status_0, null);
+        }
+        else if(status == Status.HIGH.ordinal())
+        {
+            view = inflater.inflate(R.layout.mainpage_viewpager_treatment_status_1, null);
+        }
+        else if(status == Status.DANGER.ordinal())
+        {
+            view = inflater.inflate(R.layout.mainpage_viewpager_treatment_status_2, null);
+        }
+        if(view != null)
+        {
+            this.treatmentContainer.addView(view);
         }
     }
 

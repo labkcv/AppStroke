@@ -1,5 +1,9 @@
 package id.ac.ub.filkom.sekcv.appstroke.model.dataset;
 
+import android.support.annotation.NonNull;
+
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord;
+
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.dataset> created by :
  * Name         : syafiq
@@ -16,6 +20,23 @@ public class Stroke
     {
         this.parameter = parameter;
         this.metadata = metadata;
+    }
+
+    @org.jetbrains.annotations.Contract("_ -> !null")
+    public static Stroke newInstanceFromMedicalRecord(@NonNull final MedicalRecord record)
+    {
+        return new Stroke(
+                new StrokeParameter(
+                        record.getAge(),
+                        record.getCholesterol(),
+                        record.getHdl(),
+                        record.getLdl(),
+                        record.getTriglyceride()
+                ),
+                new StrokeMetadata(
+                        record.getStatus()
+                )
+        );
     }
 
     public StrokeParameter getParameter()

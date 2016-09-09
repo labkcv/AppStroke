@@ -1,12 +1,10 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
@@ -26,7 +23,6 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Years;
 
-import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Random;
@@ -405,57 +401,7 @@ public class Diagnose extends TitledFragment
 
     private void initializeMedicalRecordModel()
     {
-        this.medicalRecordModel = new MedicalRecord(getContext());
-        this.intializeDatabase();
-    }
-
-    private void intializeDatabase()
-    {
-        new AsyncTask<Void, Void, Void>()
-        {
-            final FragmentActivity activity = Diagnose.super.getActivity();
-            private ProgressDialog progressDialog;
-
-            @Override
-            protected Void doInBackground(Void... voids)
-            {
-                try
-                {
-                    Diagnose.this.medicalRecordModel.open();
-                }
-                catch(SQLException ignored)
-                {
-                    Toast.makeText(this.activity, this.activity.getResources().getString(R.string.mainpage_viewpager_label_error_db), Toast.LENGTH_SHORT).show();
-                    this.activity.finish();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-                Diagnose.this.getActivity().runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        progressDialog = new ProgressDialog(Diagnose.super.getContext(), R.style.AppTheme_Dark_Dialog);
-                        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.setMessage("Defining the database, please wait...");
-                        progressDialog.show();
-
-                    }
-                });
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid)
-            {
-                super.onPostExecute(aVoid);
-                this.progressDialog.dismiss();
-            }
-        }.execute();
+        this.medicalRecordModel = ((MainPage) super.getActivity()).getMedicalRecordModel();
     }
 
     private void getUserAccount()

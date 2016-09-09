@@ -54,7 +54,32 @@ public class MedicalRecord extends DatabaseModel
                         "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC",
                 new String[] {String.valueOf(userID)});
 
-        List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = new LinkedList<>();
+        List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = this.retriveData(cursor);
+        cursor.close();
+        return records;
+    }
+
+    public id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord getLatestDataByUser(int userID)
+    {
+        final Cursor cursor = super.database.rawQuery("" +
+                        "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC LIMIT 1",
+                new String[] {String.valueOf(userID)});
+
+        List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = this.retriveData(cursor);
+        cursor.close();
+        if(records.size() > 0)
+        {
+            return records.get(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private LinkedList<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> retriveData(final Cursor cursor)
+    {
+        LinkedList<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = new LinkedList<>();
         if(cursor.moveToFirst())
         {
             do
@@ -73,7 +98,6 @@ public class MedicalRecord extends DatabaseModel
             }
             while(cursor.moveToNext());
         }
-
         cursor.close();
         return records;
     }

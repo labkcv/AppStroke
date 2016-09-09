@@ -1,22 +1,21 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.daimajia.swipe.util.Attributes;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 
-import java.sql.SQLException;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,10 +38,12 @@ public class MedicalRecord extends TitledFragment
     public static final String TAG = "controller.mainpage.viewpager.MedicalRecord";
     public static final int    ID  = 0b010;
 
-    private Unbinder                                                     unbinder;
-    private User                                                         user;
-    private id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord medicalRecordModel;
-    private View                                                         container;
+    private Unbinder                                                            unbinder;
+    private User                                                                user;
+    private id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord        medicalRecordModel;
+    private View                                                                container;
+    private RecyclerViewAdapter                                                 adapter;
+    private List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static MedicalRecord newInstance(String title)
@@ -68,10 +69,34 @@ public class MedicalRecord extends TitledFragment
         this.unbinder = ButterKnife.bind(this, this.container);
         this.getUserAccount();
         this.initializeMedicalRecordModel();
+        this.initializeMedicalRecordData();
+        this.initializeMedicalRecordDataContainer();
+        this.setRefreshBehaviour();
         return this.container;
     }
 
     private void initializeMedicalRecordData()
+    {
+        this.records = this.medicalRecordModel.getDataByUser(this.user.getId());
+    }
+
+    private void setRefreshBehaviour()
+    {
+        final com.baoyz.widget.PullRefreshLayout layout = ButterKnife.findById(MedicalRecord.this.container, R.id.mainpage_viewpager_medical_record_refresh_layout);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                MedicalRecord.this.records.clear();
+                MedicalRecord.this.records.addAll(MedicalRecord.this.medicalRecordModel.getDataByUser(MedicalRecord.this.user.getId()));
+                MedicalRecord.this.adapter.notifyDataSetChanged();
+                layout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void initializeMedicalRecordDataContainer()
     {
         final RecyclerView recyclerView = ButterKnife.findById(this.container, R.id.mainpage_viewpager_medical_record_recycler_container);
 
@@ -79,69 +104,18 @@ public class MedicalRecord extends TitledFragment
         recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
 
         // Item Decorator:
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(super.getContext(), R.drawable.divider)));
         recyclerView.setItemAnimator(new FadeInRightAnimator());
 
         // Adapter:
-        final RecyclerView.Adapter mAdapter = new RecyclerViewAdapter(super.getContext(), this.medicalRecordModel.getDataByUser(this.user.getId()));
-        ((RecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Multiple);
-        recyclerView.setAdapter(mAdapter);
+        this.adapter = new RecyclerViewAdapter(super.getContext(), this.records);
+        this.adapter.setMode(Attributes.Mode.Multiple);
+        recyclerView.setAdapter(adapter);
     }
 
     private void initializeMedicalRecordModel()
     {
-        this.medicalRecordModel = new id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord(getContext());
-        this.intializeDatabase();
-    }
-
-    private void intializeDatabase()
-    {
-        new AsyncTask<Void, Void, Void>()
-        {
-            final FragmentActivity activity = MedicalRecord.super.getActivity();
-            private ProgressDialog progressDialog;
-
-            @Override
-            protected Void doInBackground(Void... voids)
-            {
-                try
-                {
-                    MedicalRecord.this.medicalRecordModel.open();
-                }
-                catch(SQLException ignored)
-                {
-                    Toast.makeText(this.activity, this.activity.getResources().getString(R.string.mainpage_viewpager_label_error_db), Toast.LENGTH_SHORT).show();
-                    this.activity.finish();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-                MedicalRecord.this.getActivity().runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        progressDialog = new ProgressDialog(MedicalRecord.super.getContext(), R.style.AppTheme_Dark_Dialog);
-                        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.setMessage("Defining the database, please wait...");
-                        progressDialog.show();
-
-                    }
-                });
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid)
-            {
-                super.onPostExecute(aVoid);
-                this.progressDialog.dismiss();
-                MedicalRecord.this.initializeMedicalRecordData();
-            }
-        }.execute();
+        this.medicalRecordModel = ((MainPage) super.getActivity()).getMedicalRecordModel();
     }
 
     private void getUserAccount()
@@ -229,4 +203,6 @@ public class MedicalRecord extends TitledFragment
         super.onDetach();
         Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onDetach");
     }
+
+
 }

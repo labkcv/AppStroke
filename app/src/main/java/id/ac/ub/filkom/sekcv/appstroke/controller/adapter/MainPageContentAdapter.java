@@ -2,7 +2,7 @@ package id.ac.ub.filkom.sekcv.appstroke.controller.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
 
@@ -13,7 +13,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.Title
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class MainPageContentAdapter extends FragmentPagerAdapter
+public class MainPageContentAdapter extends FragmentStatePagerAdapter
 {
     final   TitledFragment[] fragments;
     private int              counter;

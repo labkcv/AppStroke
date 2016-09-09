@@ -17,6 +17,7 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         this.dataset = objects;
         this.context = context;
 
-        this.DATE_FORMAT = "dd-MM-yyyy";
+        this.DATE_FORMAT = "dd MMMM yyyy";
         this.TIME_FORMAT = DatabaseHelper.TIME_FORMAT;
         this.TIMESTAMP_FORMAT = DatabaseHelper.TIMESTAMP_FORMAT;
     }
@@ -57,23 +58,24 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mainpage_viewpager_medical_record_item, parent, false);
-        return new SimpleViewHolder(view);
+        return new SimpleViewHolder(view, parent.getContext());
     }
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position)
     {
         final MedicalRecord medicalRecord = this.dataset.get(position);
+        final LocalDateTime dateTime      = LocalDateTime.parse(medicalRecord.getTime(), DateTimeFormat.forPattern(this.TIMESTAMP_FORMAT));
+        final Locale        locale        = Locale.getDefault();
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        final LocalDateTime dateTime = LocalDateTime.parse(medicalRecord.getTime(), DateTimeFormat.forPattern(this.TIMESTAMP_FORMAT));
         viewHolder.localDate.setText(dateTime.toLocalDate().toString(this.DATE_FORMAT));
         viewHolder.localTime.setText(dateTime.toLocalTime().toString(this.TIME_FORMAT));
         viewHolder.year.setText(String.format(this.context.getResources().getString(R.string.mainpage_viewpager_medical_record_label_year), medicalRecord.getAge()));
         this.getStatusDescription(viewHolder.result, viewHolder.simpleIcon, viewHolder.detailIcon, medicalRecord.getStatus());
-        viewHolder.cholesterol.setText(String.format("%.4g", medicalRecord.getCholesterol()));
-        viewHolder.hdl.setText(String.format("%.4g", medicalRecord.getHdl()));
-        viewHolder.ldl.setText(String.format("%.4g", medicalRecord.getLdl()));
-        viewHolder.triglyceride.setText(String.format("%.4g", medicalRecord.getTriglyceride()));
+        viewHolder.cholesterol.setText(String.format(locale, "%.3f", medicalRecord.getCholesterol()));
+        viewHolder.hdl.setText(String.format(locale, "%.3f", medicalRecord.getHdl()));
+        viewHolder.ldl.setText(String.format(locale, "%.3f", medicalRecord.getLdl()));
+        viewHolder.triglyceride.setText(String.format(locale, "%.3f", medicalRecord.getTriglyceride()));
 
         mItemManger.bindView(viewHolder.itemView, position);
     }
@@ -115,55 +117,46 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder
     {
+        final Context context;
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_item_swipe)
         SwipeLayout swipeLayout;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localdate)
         TextView localDate;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localtime)
         TextView localTime;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_year)
         TextView year;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_simple_image_view_level_icon)
         ImageView simpleIcon;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_result)
         TextView result;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_detail_image_view_level_icon)
         ImageView detailIcon;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_cholesterol)
         TextView cholesterol;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_hdl)
         TextView hdl;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_ldl)
         TextView ldl;
-
         @Nullable
         @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_triglyceride)
         TextView triglyceride;
 
-
-        public SimpleViewHolder(View itemView)
+        public SimpleViewHolder(View itemView, final Context context)
         {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.context = context;
         }
 
         @Optional
