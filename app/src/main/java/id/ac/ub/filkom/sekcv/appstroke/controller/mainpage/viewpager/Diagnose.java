@@ -65,7 +65,7 @@ public class Diagnose extends TitledFragment
     @BindView(R.id.mainpage_viewpager_diagnose_edittext_cholesterol)  MaterialEditText cholesterolForm;
     @BindView(R.id.mainpage_viewpager_diagnose_edittext_hdl)          MaterialEditText hdlForm;
     @BindView(R.id.mainpage_viewpager_diagnose_edittext_ldl)          MaterialEditText ldlForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_triglyceride) MaterialEditText triglyceridForm;
+    @BindView(R.id.mainpage_viewpager_diagnose_edittext_triglyceride) MaterialEditText triglycerideForm;
 
     private Unbinder            unbinder;
     private DialogPlus          resultDialog;
@@ -219,7 +219,7 @@ public class Diagnose extends TitledFragment
     {
         Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".setCalculateAction");
 
-        this.triglyceridForm.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        this.triglycerideForm.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
             public boolean onEditorAction(TextView textView, int action, KeyEvent keyEvent)
@@ -267,7 +267,7 @@ public class Diagnose extends TitledFragment
         this.cholesterolForm.addValidator(nonEmptyValidator).addValidator(numericValidator).addValidator(rangeValidator);
         this.hdlForm.addValidator(nonEmptyValidator).addValidator(numericValidator).addValidator(rangeValidator);
         this.ldlForm.addValidator(nonEmptyValidator).addValidator(numericValidator).addValidator(rangeValidator);
-        this.triglyceridForm.addValidator(nonEmptyValidator).addValidator(numericValidator).addValidator(rangeValidator);
+        this.triglycerideForm.addValidator(nonEmptyValidator).addValidator(numericValidator).addValidator(rangeValidator);
     }
 
     private void createResultDialog()
@@ -375,7 +375,7 @@ public class Diagnose extends TitledFragment
                     formatter.parse(this.cholesterolForm.getText().toString()).doubleValue(),
                     formatter.parse(this.hdlForm.getText().toString()).doubleValue(),
                     formatter.parse(this.ldlForm.getText().toString()).doubleValue(),
-                    formatter.parse(this.triglyceridForm.getText().toString()).doubleValue()
+                    formatter.parse(this.triglycerideForm.getText().toString()).doubleValue()
             );
         }
         catch(ParseException ignored)
@@ -392,7 +392,7 @@ public class Diagnose extends TitledFragment
         isValid &= this.cholesterolForm.validate();
         isValid &= this.hdlForm.validate();
         isValid &= this.ldlForm.validate();
-        isValid &= this.triglyceridForm.validate();
+        isValid &= this.triglycerideForm.validate();
         return isValid;
     }
 
