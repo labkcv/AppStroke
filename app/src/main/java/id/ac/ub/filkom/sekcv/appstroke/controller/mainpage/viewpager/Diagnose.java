@@ -76,7 +76,7 @@ public class Diagnose extends TitledFragment
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static Diagnose newInstance(String title)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".newInstance");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".newInstance");
 
         final Diagnose fragment = new Diagnose();
         fragment.setTitle(title);
@@ -90,7 +90,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreate");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreate");
 
         super.onCreate(savedInstanceState);
     }
@@ -98,7 +98,7 @@ public class Diagnose extends TitledFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreateView");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreateView");
 
         final View view = inflater.inflate(R.layout.mainpage_viewpager_diagnose, container, false);
         this.unbinder = ButterKnife.bind(this, view);
@@ -124,7 +124,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onAttach(Context context)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onAttach");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onAttach");
 
         super.onAttach(context);
     }
@@ -132,7 +132,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onDestroyView()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroyView");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroyView");
 
         this.resultDialog.dismiss();
         this.unbinder.unbind();
@@ -142,7 +142,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onActivityCreated");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onActivityCreated");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -150,7 +150,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onStart()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onStart");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onStart");
 
         super.onStart();
     }
@@ -158,7 +158,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onResume()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onResume");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onResume");
 
         super.onResume();
     }
@@ -166,7 +166,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onPause()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onPause");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onPause");
 
         super.onPause();
     }
@@ -174,7 +174,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onStop()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onStop");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onStop");
 
         super.onStop();
     }
@@ -182,7 +182,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onSaveInstanceState");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onSaveInstanceState");
 
         super.onSaveInstanceState(outState);
     }
@@ -190,7 +190,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onViewStateRestored");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onViewStateRestored");
 
         super.onViewStateRestored(savedInstanceState);
     }
@@ -198,7 +198,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onDestroy()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroy");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroy");
 
         super.onDestroy();
     }
@@ -206,7 +206,7 @@ public class Diagnose extends TitledFragment
     @Override
     public void onDetach()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onDetach");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDetach");
 
         super.onDetach();
     }
@@ -217,7 +217,7 @@ public class Diagnose extends TitledFragment
 
     private void setCalculateAction()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".setCalculateAction");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".setCalculateAction");
 
         this.triglycerideForm.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
@@ -236,28 +236,28 @@ public class Diagnose extends TitledFragment
 
     private void calculateUserAge()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".calculateUserAge");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".calculateUserAge");
 
         this.ageForm.setText(String.valueOf(Years.yearsBetween(this.user.getBirthDate(), new LocalDate()).getYears()));
     }
 
     private void initializeMedicalRecordModel()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".initializeMedicalRecordModel");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".initializeMedicalRecordModel");
 
         this.medicalRecordModel = this.root.getMedicalRecordModel();
     }
 
     private void getUserAccount()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".getUserAccount");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".getUserAccount");
 
         this.user = this.root.getUser();
     }
 
     private void generateFieldValidator()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".generateFieldValidator");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".generateFieldValidator");
 
         final NotEmptyValidator       nonEmptyValidator = new NotEmptyValidator(super.getResources().getString(R.string.mainpage_viewpager_diagnose_validator_nonempty));
         final NumericValidator        numericValidator  = new NumericValidator(super.getResources().getString(R.string.mainpage_viewpager_diagnose_validator_numerical));
@@ -272,7 +272,7 @@ public class Diagnose extends TitledFragment
 
     private void createResultDialog()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".createResultDialog");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".createResultDialog");
 
         this.resultDialog = DialogPlus.newDialog(this.getActivity())
                                       .setHeader(R.layout.mainpage_viewpager_diagnose_result_header)
@@ -303,7 +303,7 @@ public class Diagnose extends TitledFragment
 
     private void changeResultContent(int resIdText, int resIdIcon)
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".changeResultContent");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".changeResultContent");
 
         this.resultText.setText(resIdText);
         this.resultText.setCompoundDrawablesWithIntrinsicBounds(0, 0, resIdIcon, 0);
@@ -315,7 +315,7 @@ public class Diagnose extends TitledFragment
 
     private void onGoToTreatmentPressed()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onGoToTreatmentPressed");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onGoToTreatmentPressed");
 
         this.onDialogDismissPressed();
         this.root.getViewPager().setCurrentItem(Treatment.ID);
@@ -323,7 +323,7 @@ public class Diagnose extends TitledFragment
 
     public void onDialogDismissPressed()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onDialogDismissPressed");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDialogDismissPressed");
 
         this.resultDialog.dismiss();
     }
@@ -331,7 +331,8 @@ public class Diagnose extends TitledFragment
     @OnClick(R.id.mainpage_viewpager_diagnose_button_calculate)
     public void onCalculatePressed()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".onCalculatePressed");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCalculatePressed");
+
         final View focus = this.root.getCurrentFocus();
         if(focus != null)
         {
@@ -366,7 +367,7 @@ public class Diagnose extends TitledFragment
     @Nullable
     private StrokeParameter generateStrokeData()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".generateStrokeData");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".generateStrokeData");
 
         final NumberFormat formatter = NumberFormat.getInstance(Locale.getDefault());
         try
@@ -387,7 +388,7 @@ public class Diagnose extends TitledFragment
 
     private boolean isFieldValid()
     {
-        Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".isFieldValid");
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".isFieldValid");
 
         boolean isValid = this.ageForm.validate();
         isValid &= this.cholesterolForm.validate();
@@ -409,7 +410,7 @@ public class Diagnose extends TitledFragment
 
         public StartUpTask(TaskDelegatable... delegations)
         {
-            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+            Log.d(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
 
             this.delegations = new LinkedList<>();
             Collections.addAll(this.delegations, delegations);
@@ -418,7 +419,7 @@ public class Diagnose extends TitledFragment
         @Override
         protected void onPreExecute()
         {
-            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+            Log.d(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
 
             super.onPreExecute();
         }
@@ -428,7 +429,7 @@ public class Diagnose extends TitledFragment
         @Override
         protected Void doInBackground(Void... voids)
         {
-            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+            Log.d(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
 
             while(!Diagnose.this.root.isActivityReady())
             {
@@ -440,7 +441,7 @@ public class Diagnose extends TitledFragment
         @Override
         protected void onPostExecute(Void aVoid)
         {
-            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+            Log.d(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
 
             for(final TaskDelegatable delegation : this.delegations)
             {

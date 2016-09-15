@@ -39,7 +39,7 @@ public class Home extends TitledFragment
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static Home newInstance(String title)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".newInstance");
+        Log.d(Home.CLASSNAME, Home.TAG + ".newInstance");
 
         final Home fragment = new Home();
         fragment.setTitle(title);
@@ -53,7 +53,7 @@ public class Home extends TitledFragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onCreate");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onCreate");
 
         super.onCreate(savedInstanceState);
     }
@@ -61,7 +61,7 @@ public class Home extends TitledFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onCreateView");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onCreateView");
 
         final View view = inflater.inflate(R.layout.mainpage_viewpager_home, container, false);
         this.unbinder = ButterKnife.bind(this, view);
@@ -75,7 +75,7 @@ public class Home extends TitledFragment
     @Override
     public void onAttach(Context context)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onAttach");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onAttach");
 
         super.onAttach(context);
     }
@@ -83,7 +83,7 @@ public class Home extends TitledFragment
     @Override
     public void onDestroyView()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onDestroyView");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onDestroyView");
 
         super.onDestroyView();
         this.unbinder.unbind();
@@ -92,7 +92,7 @@ public class Home extends TitledFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onActivityCreated");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onActivityCreated");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -100,7 +100,7 @@ public class Home extends TitledFragment
     @Override
     public void onStart()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onStart");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onStart");
 
         super.onStart();
     }
@@ -108,7 +108,7 @@ public class Home extends TitledFragment
     @Override
     public void onResume()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onResume");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onResume");
 
         super.onResume();
     }
@@ -116,7 +116,7 @@ public class Home extends TitledFragment
     @Override
     public void onPause()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onPause");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onPause");
 
         super.onPause();
     }
@@ -124,7 +124,7 @@ public class Home extends TitledFragment
     @Override
     public void onStop()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onStop");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onStop");
 
         super.onStop();
     }
@@ -132,7 +132,7 @@ public class Home extends TitledFragment
     @Override
     public void onSaveInstanceState(@Nullable Bundle outState)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onSaveInstanceState");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onSaveInstanceState");
 
         super.onSaveInstanceState(outState);
     }
@@ -140,7 +140,7 @@ public class Home extends TitledFragment
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState)
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onViewStateRestored");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onViewStateRestored");
 
         super.onViewStateRestored(savedInstanceState);
     }
@@ -148,7 +148,7 @@ public class Home extends TitledFragment
     @Override
     public void onDestroy()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onDestroy");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onDestroy");
 
         super.onDestroy();
     }
@@ -156,7 +156,7 @@ public class Home extends TitledFragment
     @Override
     public void onDetach()
     {
-        Log.i(Home.CLASSNAME, Home.TAG + ".onDetach");
+        Log.d(Home.CLASSNAME, Home.TAG + ".onDetach");
 
         super.onDetach();
     }
@@ -181,7 +181,7 @@ public class Home extends TitledFragment
 
         public StartUpTask(TaskDelegatable... delegations)
         {
-            Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+            Log.d(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
 
             this.delegations = new LinkedList<>();
             Collections.addAll(this.delegations, delegations);
@@ -190,7 +190,7 @@ public class Home extends TitledFragment
         @Override
         protected void onPreExecute()
         {
-            Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+            Log.d(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
 
             super.onPreExecute();
         }
@@ -200,7 +200,7 @@ public class Home extends TitledFragment
         @Override
         protected Void doInBackground(Void... voids)
         {
-            Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+            Log.d(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
 
             while(!Home.this.root.isActivityReady())
             {
@@ -212,7 +212,7 @@ public class Home extends TitledFragment
         @Override
         protected void onPostExecute(Void aVoid)
         {
-            Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+            Log.d(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
 
             for(final TaskDelegatable delegation : this.delegations)
             {

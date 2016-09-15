@@ -53,7 +53,7 @@ public class MedicalRecord extends TitledFragment
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static MedicalRecord newInstance(String title)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "newInstance");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "newInstance");
 
         final MedicalRecord fragment = new MedicalRecord();
         fragment.setTitle(title);
@@ -67,7 +67,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreate");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreate");
 
         super.onCreate(savedInstanceState);
     }
@@ -75,18 +75,18 @@ public class MedicalRecord extends TitledFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreateView");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreateView");
 
         this.container = inflater.inflate(R.layout.mainpage_viewpager_medical_record, container, false);
         this.unbinder = ButterKnife.bind(this, this.container);
         this.root = ((MainPage) super.getActivity());
 
-        this.setMedicalRecordObserver();
         new StartUpTask(new TaskDelegatable()
         {
             @Override
             public void delegate()
             {
+                MedicalRecord.this.setMedicalRecordObserver();
                 MedicalRecord.this.initializeMedicalRecordContainer();
                 MedicalRecord.this.root.getMedicalRecordData().addObserver(MedicalRecord.this.medicalRecordObserver);
             }
@@ -98,7 +98,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onAttach(Context context)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onAttach");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onAttach");
 
         super.onAttach(context);
     }
@@ -106,7 +106,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onDestroyView()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroyView");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroyView");
 
         this.root.getMedicalRecordData().deleteObserver(MedicalRecord.this.medicalRecordObserver);
         this.unbinder.unbind();
@@ -116,7 +116,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onActivityCreated");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onActivityCreated");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -124,7 +124,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onStart()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStart");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStart");
 
         super.onStart();
     }
@@ -132,7 +132,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onResume()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onResume");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onResume");
 
         super.onResume();
     }
@@ -140,7 +140,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onPause()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onPause");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onPause");
 
         super.onPause();
     }
@@ -148,7 +148,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onStop()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStop");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStop");
 
         super.onStop();
     }
@@ -156,7 +156,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onSaveInstanceState");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onSaveInstanceState");
 
         super.onSaveInstanceState(outState);
     }
@@ -164,7 +164,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState)
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onViewStateRestored");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onViewStateRestored");
 
         super.onViewStateRestored(savedInstanceState);
     }
@@ -172,7 +172,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onDestroy()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroy");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroy");
 
         super.onDestroy();
     }
@@ -180,7 +180,7 @@ public class MedicalRecord extends TitledFragment
     @Override
     public void onDetach()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDetach");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDetach");
 
         super.onDetach();
     }
@@ -191,7 +191,7 @@ public class MedicalRecord extends TitledFragment
 
     private void setMedicalRecordObserver()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "setMedicalRecordObserver");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "setMedicalRecordObserver");
 
         this.medicalRecordObserver = new Observer()
         {
@@ -208,7 +208,7 @@ public class MedicalRecord extends TitledFragment
 
     private void initializeMedicalRecordContainer()
     {
-        Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "initializeMedicalRecordContainer");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "initializeMedicalRecordContainer");
 
         final RecyclerView recyclerView = ButterKnife.findById(this.container, R.id.mainpage_viewpager_medical_record_recycler_container);
 
@@ -217,7 +217,7 @@ public class MedicalRecord extends TitledFragment
         recyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(super.getContext(), R.drawable.divider)));
         recyclerView.setItemAnimator(new FadeInRightAnimator());
 
-        this.adapter = new RecyclerViewAdapter(super.getActivity(), this.root.getMedicalRecordData().getLists());
+        this.adapter = new RecyclerViewAdapter(this.root, this.root.getMedicalRecordData().getLists());
         this.adapter.setMode(Attributes.Mode.Multiple);
         recyclerView.setAdapter(this.adapter);
     }
@@ -238,7 +238,7 @@ public class MedicalRecord extends TitledFragment
 
         public StartUpTask(TaskDelegatable... delegations)
         {
-            Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
 
             this.delegations = new LinkedList<>();
             Collections.addAll(this.delegations, delegations);
@@ -247,7 +247,7 @@ public class MedicalRecord extends TitledFragment
         @Override
         protected void onPreExecute()
         {
-            Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
 
             super.onPreExecute();
         }
@@ -256,7 +256,7 @@ public class MedicalRecord extends TitledFragment
         @Override
         protected Void doInBackground(Void... voids)
         {
-            Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
 
             while(!MedicalRecord.this.root.isActivityReady())
             {
@@ -268,7 +268,7 @@ public class MedicalRecord extends TitledFragment
         @Override
         protected void onPostExecute(Void aVoid)
         {
-            Log.i(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
 
             for(final TaskDelegatable delegation : this.delegations)
             {
