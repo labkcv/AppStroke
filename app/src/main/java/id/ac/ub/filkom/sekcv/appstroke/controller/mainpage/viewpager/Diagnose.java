@@ -41,7 +41,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_User;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.model.Model_MedicalRecord;
-import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegateable;
+import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 import id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose.NotEmptyValidator;
 import id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose.NumericValidator;
 import id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose.RangeValidator;
@@ -104,7 +104,7 @@ public class Diagnose extends TitledFragment
         this.unbinder = ButterKnife.bind(this, view);
         this.root = ((MainPage) super.getActivity());
 
-        new StartUpTask(new TaskDelegateable()
+        new StartUpTask(new TaskDelegatable()
         {
             @Override
             public void delegate()
@@ -363,6 +363,7 @@ public class Diagnose extends TitledFragment
         }
     }
 
+    @Nullable
     private StrokeParameter generateStrokeData()
     {
         Log.i(Diagnose.CLASSNAME, Diagnose.TAG + ".generateStrokeData");
@@ -402,12 +403,24 @@ public class Diagnose extends TitledFragment
 
     private final class StartUpTask extends AsyncTask<Void, Void, Void>
     {
-        private final LinkedList<TaskDelegateable> delegations;
+        public static final String CLASSNAME = "StartUpTask";
 
-        public StartUpTask(TaskDelegateable... delegations)
+        private final LinkedList<TaskDelegatable> delegations;
+
+        public StartUpTask(TaskDelegatable... delegations)
         {
+            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+
             this.delegations = new LinkedList<>();
             Collections.addAll(this.delegations, delegations);
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+
+            super.onPreExecute();
         }
 
         @Nullable
@@ -415,6 +428,8 @@ public class Diagnose extends TitledFragment
         @Override
         protected Void doInBackground(Void... voids)
         {
+            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+
             while(!Diagnose.this.root.isActivityReady())
             {
                 ;
@@ -425,7 +440,9 @@ public class Diagnose extends TitledFragment
         @Override
         protected void onPostExecute(Void aVoid)
         {
-            for(final TaskDelegateable delegation : this.delegations)
+            Log.i(Diagnose.CLASSNAME, Diagnose.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+
+            for(final TaskDelegatable delegation : this.delegations)
             {
                 delegation.delegate();
             }
