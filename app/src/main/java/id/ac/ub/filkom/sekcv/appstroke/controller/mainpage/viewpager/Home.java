@@ -17,7 +17,7 @@ import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
-import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegateable;
+import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager> created by :
@@ -177,9 +177,9 @@ public class Home extends TitledFragment
     {
         public static final String CLASSNAME = "StartUpTask";
 
-        private final LinkedList<TaskDelegateable> delegations;
+        private final LinkedList<TaskDelegatable> delegations;
 
-        public StartUpTask(TaskDelegateable... delegations)
+        public StartUpTask(TaskDelegatable... delegations)
         {
             Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
 
@@ -214,7 +214,7 @@ public class Home extends TitledFragment
         {
             Log.i(Home.CLASSNAME, Home.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
 
-            for(final TaskDelegateable delegation : this.delegations)
+            for(final TaskDelegatable delegation : this.delegations)
             {
                 delegation.delegate();
             }
