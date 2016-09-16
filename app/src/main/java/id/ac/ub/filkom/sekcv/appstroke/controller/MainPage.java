@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -23,6 +25,8 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.LinkedList;
 
 import butterknife.ButterKnife;
 import id.ac.ub.filkom.sekcv.appstroke.R;
@@ -31,115 +35,202 @@ import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Home;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.MedicalRecord;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Treatment;
+import id.ac.ub.filkom.sekcv.appstroke.model.custom.java.util.ObservableLinkedList;
+import id.ac.ub.filkom.sekcv.appstroke.model.dataset.ObservableStroke;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.Stroke;
-import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
+import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
+import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_User;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.model.Model_MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 
 public class MainPage extends AppCompatActivity
 {
-    private ViewPager                                                    viewPager;
-    private TabLayout                                                    tabLayout;
-    private User                                                         user;
-    private Stroke                                                       stroke;
-    private id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord medicalRecordModel;
+    public static final String CLASSNAME = "MainPage";
+    public static final String CLASSPATH = "controller";
+    public static final String TAG       = CLASSPATH + "." + CLASSNAME;
+    public static final int    ID        = 0x100;
+
+    private ViewPager              viewPager;
+    private MainPageContentAdapter pagerAdapter;
+
+    private Entity_User                                user;
+    private ObservableStroke                           stroke;
+    private ObservableLinkedList<Entity_MedicalRecord> medicalRecordData;
+    private Model_MedicalRecord                        medicalRecordModel;
+    private boolean                                    isActivityReady;
+
+    //----------------------------------------------------------------------------------------------
+    //---App Life Cycle
+    //----------------------------------------------------------------------------------------------
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onCreate");
+
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.mainpage_container);
-
 
         JodaTimeAndroid.init(this);
         ButterKnife.bind(this);
 
         this.setToolbar();
-        this.initializeModel();
+
+        this.setUser();
+        this.medicalRecordData = new ObservableLinkedList<>();
+        this.stroke = new ObservableStroke(null);
+
+        this.initializeStartup();
     }
 
-    private void initializeModel()
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu)
     {
-        this.medicalRecordModel = new id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord(super.getApplicationContext());
-        this.intializeDatabase();
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onCreateOptionsMenu");
+
+        super.getMenuInflater().inflate(R.menu.mainpage_toolbar, menu);
+        return true;
     }
 
-    private void intializeDatabase()
+    @Override
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item)
     {
-        new AsyncTask<Void, Void, Void>()
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onOptionsItemSelected");
+
+        final int id = item.getItemId();
+
+        if(id == R.id.action_settings)
         {
-            private ProgressDialog progressDialog;
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState)
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onSaveInstanceState");
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull final Bundle savedInstanceState)
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onRestoreInstanceState");
+
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onStart");
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onRestart");
+
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onResume");
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onPause");
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onStop");
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onDestroy");
+
+        this.isActivityReady = false;
+        this.medicalRecordModel.close();
+        super.onDestroy();
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //---App Interface Dependency
+    //----------------------------------------------------------------------------------------------
+
+    private void initializeStartup()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".initializeStartup");
+
+        this.medicalRecordModel = new Model_MedicalRecord(super.getApplicationContext());
+        this.initializeModel(new TaskDelegatable()
+        {
             @Override
-            protected Void doInBackground(Void... voids)
+            public void delegate()
             {
-                try
-                {
-                    MainPage.this.medicalRecordModel.open();
-                }
-                catch(SQLException ignored)
-                {
-                    Toast.makeText(MainPage.this, MainPage.super.getResources().getString(R.string.mainpage_viewpager_label_error_db), Toast.LENGTH_SHORT).show();
-                    MainPage.this.finish();
-                }
-                return null;
+                MainPage.this.setActivity(MainPage.super.getResources().getConfiguration().orientation, Home.ID);
             }
-
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-                MainPage.this.runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        progressDialog = new ProgressDialog(MainPage.this, R.style.AppTheme_Dark_Dialog);
-                        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.setMessage("Defining the database, please wait...");
-                        progressDialog.show();
-
-                    }
-                });
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid)
-            {
-                super.onPostExecute(aVoid);
-                this.progressDialog.dismiss();
-                MainPage.this.setUser();
-                MainPage.this.getLatestMedicalRecordData();
-                MainPage.this.setActivity(MainPage.super.getResources().getConfiguration().orientation, 0);
-            }
-        }.execute();
+        });
     }
 
     private void getLatestMedicalRecordData()
     {
-        id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord record = this.medicalRecordModel.getLatestDataByUser(this.user.getId());
-        if(record != null)
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getLatestMedicalRecordData");
+
+        if(this.medicalRecordData.getLists().size() > 0)
         {
-            this.stroke = Stroke.newInstanceFromMedicalRecord(record);
+            this.stroke.updateStroke(Stroke.newInstanceFromMedicalRecord(this.medicalRecordData.getLists().get(0)));
         }
     }
 
-    private void setUser()
+    public void setUser()
     {
-        Context con;
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser");
+
+        final Context context;
         try
         {
-            con = super.createPackageContext("com.labkcv.selabkc", 0);
-            SharedPreferences pref = con.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
-            this.user = new User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
+            context = super.createPackageContext("com.labkcv.selabkc", 0);
+            final SharedPreferences pref = context.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
+            this.user = new Entity_User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
+
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : Data Shared");
         }
         catch(PackageManager.NameNotFoundException e)
         {
-            Log.e("Not data shared", e.toString());
-            this.user = new User(1, LocalDate.parse("1993-12-16"), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+            this.user = new Entity_User(1, LocalDate.parse("1993-12-16"), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : No Data Shared");
         }
+
+        this.updateActivityState();
     }
 
     private void setToolbar()
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setToolbar");
+
         final Toolbar toolbar = (Toolbar) super.findViewById(R.id.mainpage_toolbar);
         super.setSupportActionBar(toolbar);
         final ActionBar actionBar = super.getSupportActionBar();
@@ -150,123 +241,204 @@ public class MainPage extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mainpage_toolbar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if(id == R.id.action_settings)
-        {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
-        Log.i("MainPage", "MainPage.onSaveInstanceState : Save Out");
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState)
-    {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.i("MainPage", "MainPage.onSaveInstanceState : Save In");
-    }
-
     public void setActivity(final int orientation, final int tabNumber)
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setActivity");
+
         switch(orientation)
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
-                final MainPageContentAdapter pagerAdapter = new MainPageContentAdapter(getSupportFragmentManager(), 4);
-                pagerAdapter.addFragment(Home.newInstance("Home"));
-                pagerAdapter.addFragment(Diagnose.newInstance("Diagnose"));
-                pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record"));
-                pagerAdapter.addFragment(Treatment.newInstance("Treatment"));
+                this.pagerAdapter = new MainPageContentAdapter(super.getSupportFragmentManager(), 4);
+                this.pagerAdapter.addFragment(Home.newInstance("Home"));
+                this.pagerAdapter.addFragment(Diagnose.newInstance("Diagnose"));
+                this.pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record"));
+                this.pagerAdapter.addFragment(Treatment.newInstance("Treatment"));
 
                 this.viewPager = (ViewPager) findViewById(R.id.viewpager);
                 this.viewPager.setAdapter(pagerAdapter);
-                this.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-                {
 
-                    // This method will be invoked when a new page becomes selected.
-                    @Override
-                    public void onPageSelected(int position)
-                    {
-                        Log.i("MainPage", "MainPage.setActivity : addOnPageChangeListener : onPageSelected " + position);
-                    }
+                final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+                tabLayout.setupWithViewPager(this.viewPager);
 
-                    // This method will be invoked when the current page is scrolled
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-                    {
-                        // Code goes here
-                    }
-
-                    // Called when the scroll state changes:
-                    // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
-                    @Override
-                    public void onPageScrollStateChanged(int state)
-                    {
-                        // Code goes here
-                    }
-                });
-                ;
-
-                // Give the TabLayout the ViewPager
-                this.tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-
-                tabLayout.setupWithViewPager(viewPager);
-                Log.d("OrientationChanged", "Create Portrait");
+                Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setActivity : PORTRAIT");
             }
             break;
             case Configuration.ORIENTATION_LANDSCAPE:
             {
             }
         }
-        viewPager.setCurrentItem(tabNumber);
-
+        this.viewPager.setCurrentItem(tabNumber);
     }
+
+    //----------------------------------------------------------------------------------------------
+    //---App User Function
+    //----------------------------------------------------------------------------------------------
 
     public ViewPager getViewPager()
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getViewPager");
+
         return this.viewPager;
     }
 
-    public User getUser()
+    public Entity_User getUser()
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getUser");
+
         return this.user;
     }
 
-    public id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord getMedicalRecordModel()
+    public Model_MedicalRecord getMedicalRecordModel()
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getMedicalRecordModel");
+
         return this.medicalRecordModel;
     }
 
-    public Stroke getStrokeData()
+    public ObservableStroke getStrokeData()
     {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getStrokeData");
+
         return this.stroke;
     }
 
-    public void setStrokeData(Stroke strokeData)
+    public void updateStroke(@NonNull Stroke stroke)
     {
-        this.stroke = strokeData;
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateStroke");
+
+        this.stroke.updateStroke(stroke);
+    }
+
+    public void updateStroke(StrokeParameter parameter, StrokeMetadata metadata)
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateStroke");
+
+        this.stroke.updateStroke(parameter, metadata);
+    }
+
+    public MainPageContentAdapter getPagerAdapter()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getPagerAdapter");
+
+        return this.pagerAdapter;
+    }
+
+    public ObservableLinkedList<Entity_MedicalRecord> getMedicalRecordData()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getMedicalRecordData");
+
+        return this.medicalRecordData;
+    }
+
+    public void updateMedicalRecordData()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateMedicalRecordData");
+
+        this.medicalRecordData.replaceList(this.medicalRecordModel.getDataByUser(this.user.getId()));
+    }
+
+    private synchronized void initializeModel(TaskDelegatable... delegations)
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".initializeModel");
+
+        if(!this.medicalRecordModel.isDatabaseReady())
+        {
+            new StartUpTask(delegations).execute();
+        }
+        else
+        {
+            for(final TaskDelegatable delegation : delegations)
+            {
+                delegation.delegate();
+            }
+        }
+    }
+
+    public boolean isActivityReady()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".isActivityReady");
+
+        return this.isActivityReady;
+    }
+
+    private void updateActivityState()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateActivityState");
+
+        this.isActivityReady = (this.user != null) && (this.medicalRecordModel != null) && this.medicalRecordModel.isDatabaseReady();
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //---Class Helper
+    //----------------------------------------------------------------------------------------------
+
+    private class StartUpTask extends AsyncTask<Void, Void, Void>
+    {
+        public static final String CLASSNAME = "StartUpTask";
+
+        private ProgressDialog              progressDialog;
+        private LinkedList<TaskDelegatable> delegations;
+
+        public StartUpTask(TaskDelegatable... delegations)
+        {
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+
+            this.delegations = new LinkedList<>();
+            Collections.addAll(this.delegations, delegations);
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+
+            super.onPreExecute();
+            MainPage.this.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    progressDialog = new ProgressDialog(MainPage.this, R.style.AppTheme_Dark_Dialog);
+                    progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setMessage(MainPage.super.getResources().getString(R.string.mainpage_database_loading_announcement));
+                    progressDialog.show();
+
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids)
+        {
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+
+            try
+            {
+                MainPage.this.medicalRecordModel.open();
+                MainPage.this.updateActivityState();
+            }
+            catch(SQLException ignored)
+            {
+                Toast.makeText(MainPage.this, MainPage.super.getResources().getString(R.string.mainpage_viewpager_label_error_db), Toast.LENGTH_SHORT).show();
+                MainPage.this.finish();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            Log.d(MainPage.CLASSNAME, MainPage.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+
+            this.progressDialog.dismiss();
+            MainPage.this.updateMedicalRecordData();
+            MainPage.this.getLatestMedicalRecordData();
+            for(final TaskDelegatable delegation : this.delegations)
+            {
+                delegation.delegate();
+            }
+            super.onPostExecute(aVoid);
+        }
     }
 }
