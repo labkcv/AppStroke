@@ -1,5 +1,6 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -74,6 +75,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     }
 
     @Override
+    @SuppressLint("RecyclerView")
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position)
     {
         final Entity_MedicalRecord medicalRecord = this.dataset.get(position);
