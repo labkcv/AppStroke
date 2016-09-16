@@ -2,6 +2,7 @@ package id.ac.ub.filkom.sekcv.appstroke.model.db.model;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +11,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseModel;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.db.model> created by :
@@ -18,15 +20,24 @@ import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseModel;
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class MedicalRecord extends DatabaseModel
+public class Model_MedicalRecord extends DatabaseModel
 {
-    public MedicalRecord(final Context context)
+    public static final String CLASSNAME = "Model_MedicalRecord";
+    public static final String CLASSPATH = "model.db.model";
+    public static final String TAG       = CLASSPATH + "." + CLASSNAME;
+    public static final int    ID        = 0x100;
+
+    public Model_MedicalRecord(final Context context)
     {
         super(context);
+
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".constructor");
     }
 
     public void storeMedicalRecordByUser(int userID, StrokeParameter parameter, StrokeMetadata metadata)
     {
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".storeMedicalRecordByUser");
+
         super.database.execSQL("" +
                         "INSERT INTO " + DatabaseContract.MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
                 new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus()});
@@ -35,6 +46,8 @@ public class MedicalRecord extends DatabaseModel
 
     public void storeMedicalRecordDummyByUser(int userID, StrokeParameter parameter, StrokeMetadata metadata, String timestamp)
     {
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".storeMedicalRecordDummyByUser");
+
         super.database.execSQL("" +
                         "INSERT INTO " + DatabaseContract.MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
                 new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus(), timestamp});
@@ -43,29 +56,35 @@ public class MedicalRecord extends DatabaseModel
 
     public void cleanDataByUser(int userID)
     {
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".cleanDataByUser");
+
         super.database.execSQL("" +
                         "DELETE FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ?",
                 new Object[] {userID});
     }
 
-    public List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> getDataByUser(int userID)
+    public List<Entity_MedicalRecord> getDataByUser(int userID)
     {
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".getDataByUser");
+
         final Cursor cursor = super.database.rawQuery("" +
                         "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC",
                 new String[] {String.valueOf(userID)});
 
-        List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = this.retriveData(cursor);
+        List<Entity_MedicalRecord> records = this.retrieveData(cursor);
         cursor.close();
         return records;
     }
 
-    public id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord getLatestDataByUser(int userID)
+    public Entity_MedicalRecord getLatestDataByUser(int userID)
     {
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".getLatestDataByUser");
+
         final Cursor cursor = super.database.rawQuery("" +
                         "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC LIMIT 1",
                 new String[] {String.valueOf(userID)});
 
-        List<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = this.retriveData(cursor);
+        List<Entity_MedicalRecord> records = this.retrieveData(cursor);
         cursor.close();
         if(records.size() > 0)
         {
@@ -77,14 +96,16 @@ public class MedicalRecord extends DatabaseModel
         }
     }
 
-    private LinkedList<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> retriveData(final Cursor cursor)
+    private LinkedList<Entity_MedicalRecord> retrieveData(final Cursor cursor)
     {
-        LinkedList<id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord> records = new LinkedList<>();
+        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".retrieveData");
+
+        LinkedList<Entity_MedicalRecord> records = new LinkedList<>();
         if(cursor.moveToFirst())
         {
             do
             {
-                records.add(new id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord(
+                records.add(new Entity_MedicalRecord(
                         cursor.getInt(0),
                         cursor.getInt(1),
                         cursor.getInt(2),
