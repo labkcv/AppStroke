@@ -69,7 +69,7 @@ public class MainPage extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onCreate");
-        int a;
+        
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.mainpage_container);
 
