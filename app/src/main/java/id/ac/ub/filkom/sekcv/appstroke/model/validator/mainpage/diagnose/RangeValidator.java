@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.rengwuxian.materialedittext.validation.METValidator;
 
 import java.text.ParseException;
+import java.util.Locale;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose> created by :
@@ -40,7 +41,7 @@ public class RangeValidator<DataType extends Number> extends METValidator
         Number value;
         try
         {
-            value = java.text.NumberFormat.getInstance().parse(text.toString());
+            value = java.text.NumberFormat.getInstance(Locale.getDefault()).parse(text.toString());
         }
         catch(ParseException e)
         {
