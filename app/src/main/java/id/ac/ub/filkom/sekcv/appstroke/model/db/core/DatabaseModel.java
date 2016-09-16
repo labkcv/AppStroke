@@ -39,13 +39,6 @@ public class DatabaseModel
 
     public boolean isDatabaseReady()
     {
-        if(this.database != null)
-        {
-            return this.database.isOpen();
-        }
-        else
-        {
-            return false;
-        }
+        return this.database != null && this.database.isOpen();
     }
 }
