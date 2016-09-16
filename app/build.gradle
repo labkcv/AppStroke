@@ -9,8 +9,8 @@ android {
         applicationId "id.ac.ub.filkom.sekcv.appstroke"
         minSdkVersion 16
         targetSdkVersion 24//Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1.0"
     }
     buildTypes {
         release {
