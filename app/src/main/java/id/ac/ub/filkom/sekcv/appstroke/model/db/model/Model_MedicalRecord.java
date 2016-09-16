@@ -25,7 +25,6 @@ public class Model_MedicalRecord extends DatabaseModel
     public static final String CLASSNAME = "Model_MedicalRecord";
     public static final String CLASSPATH = "model.db.model";
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
-    public static final int    ID        = 0x100;
 
     public Model_MedicalRecord(final Context context)
     {
