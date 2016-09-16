@@ -1,22 +1,24 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 
-import java.sql.SQLException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -24,7 +26,8 @@ import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.RecyclerViewAdapter;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
-import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.User;
+import id.ac.ub.filkom.sekcv.appstroke.model.custom.java.util.ObservableLinkedList;
+import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 
 /**
@@ -36,197 +39,241 @@ import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
  */
 public class MedicalRecord extends TitledFragment
 {
-    public static final String TAG = "controller.mainpage.viewpager.MedicalRecord";
-    public static final int    ID  = 0b010;
+    public static final String CLASSNAME = "MedicalRecord";
+    public static final String CLASSPATH = "controller.mainpage.viewpager";
+    public static final String TAG       = CLASSPATH + "." + CLASSNAME;
+    public static final int    ID        = 0b010;
 
-    private Unbinder                                                     unbinder;
-    private User                                                         user;
-    private id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord medicalRecordModel;
-    private View                                                         container;
+    private Unbinder            unbinder;
+    private View                container;
+    private RecyclerViewAdapter adapter;
+    private Observer            medicalRecordObserver;
+    private MainPage            root;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static MedicalRecord newInstance(String title)
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "newInstance");
+
         final MedicalRecord fragment = new MedicalRecord();
         fragment.setTitle(title);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.newInstace");
         return fragment;
     }
+
+    //----------------------------------------------------------------------------------------------
+    //---App Life Cycle
+    //----------------------------------------------------------------------------------------------
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreate");
+
         super.onCreate(savedInstanceState);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onCreateView");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreateView");
+
         this.container = inflater.inflate(R.layout.mainpage_viewpager_medical_record, container, false);
         this.unbinder = ButterKnife.bind(this, this.container);
-        this.getUserAccount();
-        this.initializeMedicalRecordModel();
+        this.root = ((MainPage) super.getActivity());
+
+        new StartUpTask(new TaskDelegatable()
+        {
+            @Override
+            public void delegate()
+            {
+                MedicalRecord.this.setMedicalRecordObserver();
+                MedicalRecord.this.initializeMedicalRecordContainer();
+                MedicalRecord.this.root.getMedicalRecordData().addObserver(MedicalRecord.this.medicalRecordObserver);
+            }
+        }).execute();
+
         return this.container;
     }
-
-    private void initializeMedicalRecordData()
-    {
-        final RecyclerView recyclerView = ButterKnife.findById(this.container, R.id.mainpage_viewpager_medical_record_recycler_container);
-
-        // Layout Managers:
-        recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
-
-        // Item Decorator:
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
-        recyclerView.setItemAnimator(new FadeInRightAnimator());
-
-        // Adapter:
-        final RecyclerView.Adapter mAdapter = new RecyclerViewAdapter(super.getContext(), this.medicalRecordModel.getDataByUser(this.user.getId()));
-        ((RecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Multiple);
-        recyclerView.setAdapter(mAdapter);
-    }
-
-    private void initializeMedicalRecordModel()
-    {
-        this.medicalRecordModel = new id.ac.ub.filkom.sekcv.appstroke.model.db.model.MedicalRecord(getContext());
-        this.intializeDatabase();
-    }
-
-    private void intializeDatabase()
-    {
-        new AsyncTask<Void, Void, Void>()
-        {
-            final FragmentActivity activity = MedicalRecord.super.getActivity();
-            private ProgressDialog progressDialog;
-
-            @Override
-            protected Void doInBackground(Void... voids)
-            {
-                try
-                {
-                    MedicalRecord.this.medicalRecordModel.open();
-                }
-                catch(SQLException ignored)
-                {
-                    Toast.makeText(this.activity, this.activity.getResources().getString(R.string.mainpage_viewpager_label_error_db), Toast.LENGTH_SHORT).show();
-                    this.activity.finish();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-                MedicalRecord.this.getActivity().runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        progressDialog = new ProgressDialog(MedicalRecord.super.getContext(), R.style.AppTheme_Dark_Dialog);
-                        progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.setMessage("Defining the database, please wait...");
-                        progressDialog.show();
-
-                    }
-                });
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid)
-            {
-                super.onPostExecute(aVoid);
-                this.progressDialog.dismiss();
-                MedicalRecord.this.initializeMedicalRecordData();
-            }
-        }.execute();
-    }
-
-    private void getUserAccount()
-    {
-        this.user = ((MainPage) super.getActivity()).getUser();
-    }
-    //----------------------------------------------------------------------------------------------
-
 
     @Override
     public void onAttach(Context context)
     {
-        super.onAttach(context);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onAttach");
-    }
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onAttach");
 
+        super.onAttach(context);
+    }
 
     @Override
     public void onDestroyView()
     {
-        super.onDestroyView();
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroyView");
+
+        this.root.getMedicalRecordData().deleteObserver(MedicalRecord.this.medicalRecordObserver);
         this.unbinder.unbind();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onDestroyView");
+        super.onDestroyView();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onActivityCreated");
+
         super.onActivityCreated(savedInstanceState);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onActivityCreated");
     }
 
     @Override
     public void onStart()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStart");
+
         super.onStart();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onStart");
     }
 
     @Override
     public void onResume()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onResume");
+
         super.onResume();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onResume");
     }
 
     @Override
     public void onPause()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onPause");
+
         super.onPause();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onPause");
     }
 
     @Override
     public void onStop()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStop");
+
         super.onStop();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onStop");
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onSaveInstanceState");
+
         super.onSaveInstanceState(outState);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onSaveInstanceState");
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState)
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onViewStateRestored");
+
         super.onViewStateRestored(savedInstanceState);
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onViewStateRestored");
     }
 
     @Override
     public void onDestroy()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroy");
+
         super.onDestroy();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onDestroy");
     }
 
     @Override
     public void onDetach()
     {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDetach");
+
         super.onDetach();
-        Log.i("MedicalRecord", "controller.mainpage.viewpager.MedicalRecord.onDetach");
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //---App Interface Dependency
+    //----------------------------------------------------------------------------------------------
+
+    private void setMedicalRecordObserver()
+    {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "setMedicalRecordObserver");
+
+        this.medicalRecordObserver = new Observer()
+        {
+            @Override
+            public void update(Observable observable, Object o)
+            {
+                if(observable instanceof ObservableLinkedList)
+                {
+                    MedicalRecord.this.adapter.notifyDataSetChanged();
+                }
+            }
+        };
+    }
+
+    private void initializeMedicalRecordContainer()
+    {
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "initializeMedicalRecordContainer");
+
+        final RecyclerView recyclerView = ButterKnife.findById(this.container, R.id.mainpage_viewpager_medical_record_recycler_container);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(super.getContext(), R.drawable.divider)));
+        recyclerView.setItemAnimator(new FadeInRightAnimator());
+
+        this.adapter = new RecyclerViewAdapter(this.root, this.root.getMedicalRecordData().getLists());
+        this.adapter.setMode(Attributes.Mode.Multiple);
+        recyclerView.setAdapter(this.adapter);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //---App User Function
+    //----------------------------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------
+    //---Class Helper
+    //----------------------------------------------------------------------------------------------
+
+    private class StartUpTask extends AsyncTask<Void, Void, Void>
+    {
+        public static final String CLASSNAME = "StartUpTask";
+
+        private final LinkedList<TaskDelegatable> delegations;
+
+        public StartUpTask(TaskDelegatable... delegations)
+        {
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".Constructor");
+
+            this.delegations = new LinkedList<>();
+            Collections.addAll(this.delegations, delegations);
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPreExecute");
+
+            super.onPreExecute();
+        }
+
+        @SuppressWarnings({"StatementWithEmptyBody", "UnnecessarySemicolon"})
+        @Override
+        protected Void doInBackground(Void... voids)
+        {
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".doInBackground");
+
+            while(!MedicalRecord.this.root.isActivityReady())
+            {
+                ;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid)
+        {
+            Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
+
+            for(final TaskDelegatable delegation : this.delegations)
+            {
+                delegation.delegate();
+            }
+        }
     }
 }

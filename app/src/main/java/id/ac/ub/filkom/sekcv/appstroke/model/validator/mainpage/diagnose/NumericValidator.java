@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.rengwuxian.materialedittext.validation.METValidator;
 
 import java.text.ParseException;
+import java.util.Locale;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.validator.mainpage.diagnose> created by :
@@ -26,7 +27,7 @@ public class NumericValidator extends METValidator
     {
         try
         {
-            java.text.NumberFormat.getInstance().parse(text.toString());
+            java.text.NumberFormat.getInstance(Locale.getDefault()).parse(text.toString());
             return true;
         }
         catch(ParseException ignored)

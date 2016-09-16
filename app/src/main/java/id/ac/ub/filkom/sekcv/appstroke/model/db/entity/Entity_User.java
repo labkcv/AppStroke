@@ -9,7 +9,7 @@ import org.joda.time.LocalDate;
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class User
+public class Entity_User
 {
     private final int       id;
     private final LocalDate birthDate;
@@ -18,7 +18,7 @@ public class User
     private       String    password;
     private       boolean   status;
 
-    public User(int id, LocalDate birthDate, String name, String email, String password, boolean status)
+    public Entity_User(int id, LocalDate birthDate, String name, String email, String password, boolean status)
     {
         this.id = id;
         this.birthDate = birthDate;

@@ -7,7 +7,7 @@ package id.ac.ub.filkom.sekcv.appstroke.model.db.entity;
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-public class MedicalRecord
+public class Entity_MedicalRecord
 {
     private final int    id;
     private final int    user;
@@ -19,12 +19,12 @@ public class MedicalRecord
     private       double triglyceride;
     private       int    status;
 
-    public MedicalRecord(int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
+    public Entity_MedicalRecord(int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
     {
         this(-1, user, age, cholesterol, hdl, ldl, triglyceride, status, time);
     }
 
-    public MedicalRecord(int id, int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
+    public Entity_MedicalRecord(int id, int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
     {
         this.id = id;
         this.user = user;
