@@ -2,7 +2,7 @@ package id.ac.ub.filkom.sekcv.appstroke.model.dataset;
 
 import android.support.annotation.NonNull;
 
-import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.dataset> created by :
@@ -16,14 +16,18 @@ public class Stroke
     private StrokeParameter parameter;
     private StrokeMetadata  metadata;
 
+    public Stroke()
+    {
+        this(null, null);
+    }
+
     public Stroke(StrokeParameter parameter, StrokeMetadata metadata)
     {
         this.parameter = parameter;
         this.metadata = metadata;
     }
 
-    @org.jetbrains.annotations.Contract("_ -> !null")
-    public static Stroke newInstanceFromMedicalRecord(@NonNull final MedicalRecord record)
+    public static Stroke newInstanceFromMedicalRecord(@NonNull final Entity_MedicalRecord record)
     {
         return new Stroke(
                 new StrokeParameter(
@@ -41,21 +45,32 @@ public class Stroke
 
     public StrokeParameter getParameter()
     {
-        return parameter;
+        return this.parameter;
     }
 
-    public void setParameter(StrokeParameter parameter)
+    public void setParameter(@NonNull StrokeParameter parameter)
     {
         this.parameter = parameter;
     }
 
     public StrokeMetadata getMetadata()
     {
-        return metadata;
+        return this.metadata;
     }
 
-    public void setMetadata(StrokeMetadata metadata)
+    public void setMetadata(@NonNull StrokeMetadata metadata)
     {
         this.metadata = metadata;
+    }
+
+    public void updateStroke(@NonNull final Stroke stroke)
+    {
+        this.updateStroke(stroke.parameter, stroke.metadata);
+    }
+
+    public void updateStroke(@NonNull final StrokeParameter parameter, @NonNull final StrokeMetadata metadata)
+    {
+        this.setParameter(parameter);
+        this.setMetadata(metadata);
     }
 }
