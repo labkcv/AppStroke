@@ -13,8 +13,10 @@ import android.widget.TextView;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
-import org.joda.time.LocalDateTime;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +48,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
 
     private final MainPage                   root;
     private final List<Entity_MedicalRecord> dataset;
+    private       DateTimeFormatter          ageFormatter;
 
     public RecyclerViewAdapter(MainPage root, List<Entity_MedicalRecord> objects)
     {
@@ -55,6 +58,12 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         this.DATE_FORMAT = "dd MMMM yyyy";
         this.TIME_FORMAT = DatabaseHelper.TIME_FORMAT;
         this.TIMESTAMP_FORMAT = DatabaseHelper.TIMESTAMP_FORMAT;
+        this.updateTimeFormatter();
+    }
+
+    public void updateTimeFormatter()
+    {
+        this.ageFormatter = DateTimeFormat.forPattern(this.TIMESTAMP_FORMAT + "ZZ").withZone(DateTimeZone.getDefault());
     }
 
     @Override
@@ -68,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position)
     {
         final Entity_MedicalRecord medicalRecord = this.dataset.get(position);
-        final LocalDateTime        dateTime      = LocalDateTime.parse(medicalRecord.getTime(), DateTimeFormat.forPattern(this.TIMESTAMP_FORMAT));
+        final DateTime             dateTime      = DateTime.parse(medicalRecord.getTime() + "+00:00", this.ageFormatter);
         final Locale               locale        = Locale.getDefault();
         if(viewHolder.swipeLayout != null)
         {
@@ -76,11 +85,11 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         }
         if(viewHolder.localDate != null)
         {
-            viewHolder.localDate.setText(dateTime.toLocalDate().toString(this.DATE_FORMAT));
+            viewHolder.localDate.setText(dateTime.toString(this.DATE_FORMAT));
         }
         if(viewHolder.localTime != null)
         {
-            viewHolder.localTime.setText(dateTime.toLocalTime().toString(this.TIME_FORMAT));
+            viewHolder.localTime.setText(dateTime.toString(this.TIME_FORMAT));
         }
         if(viewHolder.year != null)
         {
