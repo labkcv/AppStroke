@@ -211,7 +211,7 @@ public class MainPage extends AppCompatActivity
         final Context context;
         try
         {
-            context = super.createPackageContext("com.labkcv.selabkc", 0);
+            context = super.createPackageContext("id.ac.ub.filkom.se.kcv.astech.astechlauncher", 0);
             final SharedPreferences pref = context.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
             this.user = new Entity_User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
 
