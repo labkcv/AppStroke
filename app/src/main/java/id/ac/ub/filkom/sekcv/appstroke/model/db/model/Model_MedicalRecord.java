@@ -9,7 +9,7 @@ import java.util.List;
 
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
-import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract.MedicalRecord;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseModel;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 
@@ -38,7 +38,7 @@ public class Model_MedicalRecord extends DatabaseModel
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".storeMedicalRecordByUser");
 
         super.database.execSQL("" +
-                        "INSERT INTO " + DatabaseContract.MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
+                        "INSERT INTO " + MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
                 new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus()});
 
     }
@@ -48,7 +48,7 @@ public class Model_MedicalRecord extends DatabaseModel
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".storeMedicalRecordDummyByUser");
 
         super.database.execSQL("" +
-                        "INSERT INTO " + DatabaseContract.MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "INSERT INTO " + MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
                 new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus(), timestamp});
 
     }
@@ -58,7 +58,7 @@ public class Model_MedicalRecord extends DatabaseModel
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".cleanDataByUser");
 
         super.database.execSQL("" +
-                        "DELETE FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ?",
+                        "DELETE FROM " + MedicalRecord.TABLE_NAME + " WHERE " + MedicalRecord.TABLE_NAME + "." + MedicalRecord.COLUMN_NAME_USER + " = ?",
                 new Object[] {userID});
     }
 
@@ -67,7 +67,7 @@ public class Model_MedicalRecord extends DatabaseModel
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".getDataByUser");
 
         final Cursor cursor = super.database.rawQuery("" +
-                        "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC",
+                        "SELECT * FROM " + MedicalRecord.TABLE_NAME + " WHERE " + MedicalRecord.TABLE_NAME + "." + MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + MedicalRecord.TABLE_NAME + "." + MedicalRecord.COLUMN_NAME_TIME + ") DESC",
                 new String[] {String.valueOf(userID)});
 
         List<Entity_MedicalRecord> records = this.retrieveData(cursor);
@@ -80,7 +80,7 @@ public class Model_MedicalRecord extends DatabaseModel
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".getLatestDataByUser");
 
         final Cursor cursor = super.database.rawQuery("" +
-                        "SELECT * FROM " + DatabaseContract.MedicalRecord.TABLE_NAME + " WHERE " + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + DatabaseContract.MedicalRecord.TABLE_NAME + "." + DatabaseContract.MedicalRecord.COLUMN_NAME_TIME + ") DESC LIMIT 1",
+                        "SELECT * FROM " + MedicalRecord.TABLE_NAME + " WHERE " + MedicalRecord.TABLE_NAME + "." + MedicalRecord.COLUMN_NAME_USER + " = ? ORDER BY datetime(" + MedicalRecord.TABLE_NAME + "." + MedicalRecord.COLUMN_NAME_TIME + ") DESC LIMIT 1",
                 new String[] {String.valueOf(userID)});
 
         List<Entity_MedicalRecord> records = this.retrieveData(cursor);

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract.User;
 
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.db.core> created by :
@@ -50,19 +51,52 @@ public class DatabaseHelper extends SQLiteOpenHelper
             MedicalRecord.COLUMN_NAME_TIME + WHITESPACE + TYPE_TEXT + WHITESPACE + CONSTRAINT_CURRENT_TIMESTAMP + WHITESPACE +
             " );";
 
+    private static final String SQL_CREATE_USER_ENTRIES = "" +
+            "CREATE TABLE IF NOT EXISTS" + WHITESPACE + User.TABLE_NAME + WHITESPACE +
+            "( " +
+            User.COLUMN_NAME_ID + WHITESPACE + TYPE_INTEGER + WHITESPACE + CONSTRAINT_NOT_NULL + WHITESPACE + CONSTRAINT_PRIMARY_KEY + COMMA_SEPARATOR + WHITESPACE +
+            User.COLUMN_NAME_NAME + WHITESPACE + TYPE_TEXT + WHITESPACE + CONSTRAINT_NOT_NULL + COMMA_SEPARATOR + WHITESPACE +
+            User.COLUMN_NAME_BIRTHDATE + WHITESPACE + TYPE_TEXT + WHITESPACE + CONSTRAINT_NOT_NULL + COMMA_SEPARATOR + WHITESPACE +
+            User.COLUMN_NAME_EMAIL + WHITESPACE + TYPE_TEXT + WHITESPACE + CONSTRAINT_NOT_NULL + COMMA_SEPARATOR + WHITESPACE +
+            User.COLUMN_NAME_PASSWORD + WHITESPACE + TYPE_TEXT + WHITESPACE + CONSTRAINT_NOT_NULL + WHITESPACE +
+            " );";
+
     private static final String SQL_DROP_MEDICAL_RECORD_ENTRIES = "" +
             "DROP TABLE IF EXISTS " + MedicalRecord.TABLE_NAME;
 
-    public DatabaseHelper(Context context)
+    private static final String SQL_DROP_USER_ENTRIES = "" +
+            "DROP TABLE IF EXISTS " + User.TABLE_NAME;
+
+    private static DatabaseHelper mInstance = null;
+    private final Context context;
+
+    private DatabaseHelper(final Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
         Log.i("DatabaseHelper", "model.db.core.DatabaseHelper.constructor");
+    }
+
+    public static DatabaseHelper getInstance(final Context ctx)
+    {
+        /**
+         * use the application context as suggested by CommonsWare.
+         * this will ensure that you dont accidentally leak an Activitys
+         * context (see this article for more information:
+         * http://android-developers.blogspot.nl/2009/01/avoiding-memory-leaks.html)
+         */
+        if(DatabaseHelper.mInstance == null)
+        {
+            DatabaseHelper.mInstance = new DatabaseHelper(ctx.getApplicationContext());
+        }
+        return DatabaseHelper.mInstance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
         sqLiteDatabase.execSQL(SQL_CREATE_MEDICAL_RECORD_ENTRIES);
+        sqLiteDatabase.execSQL(SQL_CREATE_USER_ENTRIES);
         Log.i("DatabaseHelper", "model.db.core.DatabaseHelper.onCreate");
     }
 
@@ -72,6 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         sqLiteDatabase.execSQL(SQL_DROP_MEDICAL_RECORD_ENTRIES);
+        sqLiteDatabase.execSQL(SQL_DROP_USER_ENTRIES);
         onCreate(sqLiteDatabase);
         Log.i("DatabaseHelper", "model.db.core.DatabaseHelper.onUpgrade");
     }
