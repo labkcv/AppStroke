@@ -16,16 +16,14 @@ public class Entity_User
     private       String    name;
     private       String    email;
     private       String    password;
-    private       boolean   status;
 
-    public Entity_User(int id, LocalDate birthDate, String name, String email, String password, boolean status)
+    public Entity_User(int id, LocalDate birthDate, String name, String email, String password)
     {
         this.id = id;
         this.birthDate = birthDate;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.status = status;
     }
 
     public int getId()
@@ -61,16 +59,6 @@ public class Entity_User
     public void setPassword(String password)
     {
         this.password = password;
-    }
-
-    public boolean isStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(boolean status)
-    {
-        this.status = status;
     }
 
     public LocalDate getBirthDate()
