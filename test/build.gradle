@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24//Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+    buildToolsVersion "24.0.2"//project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        //applicationId "id.ac.ub.filkom.se.kcv.astech.medical.appstroke"
+        minSdkVersion 16
+        targetSdkVersion 24//Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile project(':app')
+}
