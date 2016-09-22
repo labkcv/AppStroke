@@ -25,7 +25,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
-import id.ac.ub.filkom.sekcv.appstroke.R2;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
@@ -48,13 +47,13 @@ public class Treatment extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b100;
 
-    @BindView(R2.id.mainpage_viewpager_treatment_text_view_cholesterol)  TextView   cholesterol;
-    @BindView(R2.id.mainpage_viewpager_treatment_text_view_hdl)          TextView   hdl;
-    @BindView(R2.id.mainpage_viewpager_treatment_text_view_ldl)          TextView   ldl;
-    @BindView(R2.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView   triglyceride;
-    @BindView(R2.id.mainpage_viewpager_treatment_text_view_level_status) TextView   status;
-    @BindView(R2.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView  icon;
-    @BindView(R2.id.mainpage_viewpager_treatment_container)              ScrollView treatmentContainer;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_cholesterol)  TextView   cholesterol;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_hdl)          TextView   hdl;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_ldl)          TextView   ldl;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView   triglyceride;
+    @BindView(R.id.mainpage_viewpager_treatment_text_view_level_status) TextView   status;
+    @BindView(R.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView  icon;
+    @BindView(R.id.mainpage_viewpager_treatment_container)              ScrollView treatmentContainer;
 
     private Unbinder unbinder;
     private Observer strokeObserver;
