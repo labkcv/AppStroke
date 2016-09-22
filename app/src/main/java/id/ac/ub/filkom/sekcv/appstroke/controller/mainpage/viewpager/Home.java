@@ -41,6 +41,8 @@ public class Home extends TitledFragment
     {
         Log.d(Home.CLASSNAME, Home.TAG + ".newInstance");
 
+        int i;
+
         final Home fragment = new Home();
         fragment.setTitle(title);
         return fragment;
