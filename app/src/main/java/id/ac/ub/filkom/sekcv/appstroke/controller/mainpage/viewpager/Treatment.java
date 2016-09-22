@@ -21,9 +21,6 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
@@ -47,15 +44,14 @@ public class Treatment extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b100;
 
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_cholesterol)  TextView   cholesterol;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_hdl)          TextView   hdl;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_ldl)          TextView   ldl;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_triglyceride) TextView   triglyceride;
-    @BindView(R.id.mainpage_viewpager_treatment_text_view_level_status) TextView   status;
-    @BindView(R.id.mainpage_viewpager_treatment_image_view_level_icon)  ImageView  icon;
-    @BindView(R.id.mainpage_viewpager_treatment_container)              ScrollView treatmentContainer;
+    private TextView   cholesterol;
+    private TextView   hdl;
+    private TextView   ldl;
+    private TextView   triglyceride;
+    private TextView   status;
+    private ImageView  icon;
+    private ScrollView treatmentContainer;
 
-    private Unbinder unbinder;
     private Observer strokeObserver;
     private MainPage root;
 
@@ -87,8 +83,8 @@ public class Treatment extends TitledFragment
         Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onCreateView");
 
         final View view = inflater.inflate(R.layout.mainpage_viewpager_treatment, container, false);
-        this.unbinder = ButterKnife.bind(this, view);
         this.root = ((MainPage) super.getActivity());
+        this.registerView(view);
 
         new StartUpTask(new TaskDelegatable()
         {
@@ -118,7 +114,6 @@ public class Treatment extends TitledFragment
         Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onDestroyView");
 
         this.root.getStrokeData().deleteObserver(this.strokeObserver);
-        this.unbinder.unbind();
         super.onDestroyView();
     }
 
@@ -197,6 +192,17 @@ public class Treatment extends TitledFragment
     //----------------------------------------------------------------------------------------------
     //---App Interface Dependency
     //----------------------------------------------------------------------------------------------
+
+    private void registerView(final View container)
+    {
+        this.cholesterol = (TextView) container.findViewById(R.id.mainpage_viewpager_treatment_text_view_cholesterol);
+        this.hdl = (TextView) container.findViewById(R.id.mainpage_viewpager_treatment_text_view_hdl);
+        this.ldl = (TextView) container.findViewById(R.id.mainpage_viewpager_treatment_text_view_ldl);
+        this.triglyceride = (TextView) container.findViewById(R.id.mainpage_viewpager_treatment_text_view_triglyceride);
+        this.status = (TextView) container.findViewById(R.id.mainpage_viewpager_treatment_text_view_level_status);
+        this.icon = (ImageView) container.findViewById(R.id.mainpage_viewpager_treatment_image_view_level_icon);
+        this.treatmentContainer = (ScrollView) container.findViewById(R.id.mainpage_viewpager_treatment_container);
+    }
 
     private void setStrokeObserver()
     {

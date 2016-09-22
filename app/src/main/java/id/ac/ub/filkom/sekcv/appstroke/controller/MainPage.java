@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import butterknife.ButterKnife;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.MainPageContentAdapter;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
@@ -75,7 +74,6 @@ public class MainPage extends AppCompatActivity
         super.setContentView(R.layout.mainpage_container);
 
         JodaTimeAndroid.init(this);
-        ButterKnife.bind(this);
 
         this.setToolbar();
 
@@ -214,12 +212,15 @@ public class MainPage extends AppCompatActivity
         {
             context = super.createPackageContext("id.ac.ub.filkom.se.kcv.astech.astechlauncher", 0);
             final SharedPreferences pref = context.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
-            this.user = new Entity_User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
+            //this.user = new Entity_User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
+            this.user = new Entity_User(1, LocalDate.parse("1993-12-16", DateTimeFormat.forPattern("yyyy-MM-dd")), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
 
             Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : Data Shared");
         }
         catch(PackageManager.NameNotFoundException e)
         {
+            this.user = new Entity_User(1, LocalDate.parse("1993-12-16", DateTimeFormat.forPattern("yyyy-MM-dd")), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+
             Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
 
             Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : No Data Shared");

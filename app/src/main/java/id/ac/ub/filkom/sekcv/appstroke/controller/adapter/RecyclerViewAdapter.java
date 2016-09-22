@@ -2,7 +2,6 @@ package id.ac.ub.filkom.sekcv.appstroke.controller.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,10 +21,6 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Treatment;
@@ -170,49 +165,70 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     public static class SimpleViewHolder extends RecyclerView.ViewHolder
     {
         final Context context;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_item_swipe)
+
         SwipeLayout swipeLayout;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localdate)
         TextView    localDate;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localtime)
         TextView    localTime;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_year)
         TextView    year;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_image_view_level_icon)
         ImageView   simpleIcon;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_result)
         TextView    result;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_image_view_level_icon)
         ImageView   detailIcon;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_cholesterol)
         TextView    cholesterol;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_hdl)
         TextView    hdl;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_ldl)
         TextView    ldl;
-        @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_triglyceride)
         TextView    triglyceride;
 
         public SimpleViewHolder(View itemView, final Context context)
         {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             this.context = context;
+            this.registerView(itemView);
+            this.registerListener(itemView);
         }
 
-        @Optional
-        @OnClick(R.id.mainpage_viewpager_medical_record_item_go_to_detail)
+        //----------------------------------------------------------------------------------------------
+        //---App Interface Dependency
+        //----------------------------------------------------------------------------------------------
+
+        private void registerView(final View container)
+        {
+            this.swipeLayout = (SwipeLayout) container.findViewById(R.id.mainpage_viewpager_medical_record_item_swipe);
+            this.localDate = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_simple_text_view_localdate);
+            this.localTime = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_simple_text_view_localtime);
+            this.year = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_simple_text_view_year);
+            this.simpleIcon = (ImageView) container.findViewById(R.id.mainpage_viewpager_medical_record_simple_image_view_level_icon);
+            this.result = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_simple_text_view_result);
+            this.detailIcon = (ImageView) container.findViewById(R.id.mainpage_viewpager_medical_record_detail_image_view_level_icon);
+            this.cholesterol = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_detail_text_view_cholesterol);
+            this.hdl = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_detail_text_view_hdl);
+            this.ldl = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_detail_text_view_ldl);
+            this.triglyceride = (TextView) container.findViewById(R.id.mainpage_viewpager_medical_record_detail_text_view_triglyceride);
+        }
+
+        private void registerListener(final View container)
+        {
+            container.findViewById(R.id.mainpage_viewpager_medical_record_item_go_to_detail).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    SimpleViewHolder.this.onGoToDetailInitiated();
+                }
+            });
+            container.findViewById(R.id.mainpage_viewpager_medical_record_item_go_to_simple).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    SimpleViewHolder.this.onGoToSimpleInitiated();
+                }
+            });
+        }
+
+        //----------------------------------------------------------------------------------------------
+        //---App User Function
+        //----------------------------------------------------------------------------------------------
+
         public void onGoToDetailInitiated()
         {
             if(this.swipeLayout != null)
@@ -221,8 +237,6 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
             }
         }
 
-        @Optional
-        @OnClick(R.id.mainpage_viewpager_medical_record_item_go_to_simple)
         public void onGoToSimpleInitiated()
         {
             if(this.swipeLayout != null)

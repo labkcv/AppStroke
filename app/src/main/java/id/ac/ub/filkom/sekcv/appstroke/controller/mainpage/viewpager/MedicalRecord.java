@@ -20,8 +20,6 @@ import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.RecyclerViewAdapter;
@@ -44,7 +42,6 @@ public class MedicalRecord extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b010;
 
-    private Unbinder            unbinder;
     private View                container;
     private RecyclerViewAdapter adapter;
     private Observer            medicalRecordObserver;
@@ -78,7 +75,6 @@ public class MedicalRecord extends TitledFragment
         Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreateView");
 
         this.container = inflater.inflate(R.layout.mainpage_viewpager_medical_record, container, false);
-        this.unbinder = ButterKnife.bind(this, this.container);
         this.root = ((MainPage) super.getActivity());
 
         new StartUpTask(new TaskDelegatable()
@@ -109,7 +105,6 @@ public class MedicalRecord extends TitledFragment
         Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroyView");
 
         this.root.getMedicalRecordData().deleteObserver(MedicalRecord.this.medicalRecordObserver);
-        this.unbinder.unbind();
         super.onDestroyView();
     }
 
@@ -210,7 +205,7 @@ public class MedicalRecord extends TitledFragment
     {
         Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "initializeMedicalRecordContainer");
 
-        final RecyclerView recyclerView = ButterKnife.findById(this.container, R.id.mainpage_viewpager_medical_record_recycler_container);
+        final RecyclerView recyclerView = (RecyclerView) this.container.findViewById(R.id.mainpage_viewpager_medical_record_recycler_container);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
 

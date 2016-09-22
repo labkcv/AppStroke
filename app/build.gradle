@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24//Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
@@ -25,8 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.orhanobut:dialogplus:1.11@aar'
     compile 'net.danlew:android.joda:2.9.4.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'

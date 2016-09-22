@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
@@ -33,7 +31,6 @@ public class Home extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b000;
 
-    private Unbinder unbinder;
     private MainPage root;
 
     @SuppressWarnings("UnnecessaryLocalVariable")
@@ -64,7 +61,6 @@ public class Home extends TitledFragment
         Log.d(Home.CLASSNAME, Home.TAG + ".onCreateView");
 
         final View view = inflater.inflate(R.layout.mainpage_viewpager_home, container, false);
-        this.unbinder = ButterKnife.bind(this, view);
         this.root = ((MainPage) super.getActivity());
 
         new StartUpTask().execute();
@@ -86,7 +82,6 @@ public class Home extends TitledFragment
         Log.d(Home.CLASSNAME, Home.TAG + ".onDestroyView");
 
         super.onDestroyView();
-        this.unbinder.unbind();
     }
 
     @Override
