@@ -28,10 +28,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.SVM;
@@ -60,14 +56,13 @@ public class Diagnose extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b001;
 
-    public                                                            TextView         resultText;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_age)          MaterialEditText ageForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_cholesterol)  MaterialEditText cholesterolForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_hdl)          MaterialEditText hdlForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_ldl)          MaterialEditText ldlForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_triglyceride) MaterialEditText triglycerideForm;
+    private TextView         resultText;
+    private MaterialEditText ageForm;
+    private MaterialEditText cholesterolForm;
+    private MaterialEditText hdlForm;
+    private MaterialEditText ldlForm;
+    private MaterialEditText triglycerideForm;
 
-    private Unbinder            unbinder;
     private DialogPlus          resultDialog;
     private Entity_User         user;
     private Model_MedicalRecord medicalRecordModel;
@@ -101,8 +96,9 @@ public class Diagnose extends TitledFragment
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreateView");
 
         final View view = inflater.inflate(R.layout.mainpage_viewpager_diagnose, container, false);
-        this.unbinder = ButterKnife.bind(this, view);
         this.root = ((MainPage) super.getActivity());
+        this.registerView(view);
+        this.registerListener(view);
 
         new StartUpTask(new TaskDelegatable()
         {
@@ -135,7 +131,6 @@ public class Diagnose extends TitledFragment
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroyView");
 
         this.resultDialog.dismiss();
-        this.unbinder.unbind();
         super.onDestroyView();
     }
 
@@ -214,6 +209,31 @@ public class Diagnose extends TitledFragment
     //----------------------------------------------------------------------------------------------
     //---App Interface Dependency
     //----------------------------------------------------------------------------------------------
+
+    private void registerView(final View container)
+    {
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".registerView");
+
+        this.ageForm = (MaterialEditText) container.findViewById(R.id.mainpage_viewpager_diagnose_edittext_age);
+        this.cholesterolForm = (MaterialEditText) container.findViewById(R.id.mainpage_viewpager_diagnose_edittext_cholesterol);
+        this.hdlForm = (MaterialEditText) container.findViewById(R.id.mainpage_viewpager_diagnose_edittext_hdl);
+        this.ldlForm = (MaterialEditText) container.findViewById(R.id.mainpage_viewpager_diagnose_edittext_ldl);
+        this.triglycerideForm = (MaterialEditText) container.findViewById(R.id.mainpage_viewpager_diagnose_edittext_triglyceride);
+    }
+
+    private void registerListener(final View container)
+    {
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".registerListener");
+
+        container.findViewById(R.id.mainpage_viewpager_diagnose_button_calculate).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Diagnose.this.onCalculatePressed();
+            }
+        });
+    }
 
     private void setCalculateAction()
     {
@@ -294,8 +314,9 @@ public class Diagnose extends TitledFragment
                                       .setCancelable(true)
                                       .setPadding(8, 8, 8, 8)
                                       .create();
-        this.resultText = ButterKnife.findById(this.resultDialog.getHolderView(), R.id.mainpage_viewpager_diagnose_result_holder_textview_result);
-        ButterKnife.findById(this.resultDialog.getHeaderView(), R.id.mainpage_viewpager_diagnose_result_header_button_dismiss).setOnClickListener(new View.OnClickListener()
+        this.resultText = (TextView) this.resultDialog.getHolderView().findViewById(R.id.mainpage_viewpager_diagnose_result_holder_textview_result);
+
+        this.resultDialog.getHeaderView().findViewById(R.id.mainpage_viewpager_diagnose_result_header_button_dismiss).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -303,7 +324,7 @@ public class Diagnose extends TitledFragment
                 Diagnose.this.onDialogDismissPressed();
             }
         });
-        ButterKnife.findById(this.resultDialog.getFooterView(), R.id.mainpage_viewpager_diagnose_result_footer_button_to_treatment).setOnClickListener(new View.OnClickListener()
+        this.resultDialog.getFooterView().findViewById(R.id.mainpage_viewpager_diagnose_result_footer_button_to_treatment).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -340,7 +361,6 @@ public class Diagnose extends TitledFragment
         this.resultDialog.dismiss();
     }
 
-    @OnClick(R.id.mainpage_viewpager_diagnose_button_calculate)
     public void onCalculatePressed()
     {
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCalculatePressed");
