@@ -21,9 +21,6 @@ import android.widget.Toast;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +40,7 @@ import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_User;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.model.Model_MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.model.Model_User;
 import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 
 public class MainPage extends AppCompatActivity
@@ -59,6 +57,7 @@ public class MainPage extends AppCompatActivity
     private ObservableStroke                           stroke;
     private ObservableLinkedList<Entity_MedicalRecord> medicalRecordData;
     private Model_MedicalRecord                        medicalRecordModel;
+    private Model_User                                 userModel;
     private boolean                                    isActivityReady;
 
     //----------------------------------------------------------------------------------------------
@@ -69,7 +68,7 @@ public class MainPage extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onCreate");
-        
+
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.mainpage_container);
 
@@ -77,7 +76,6 @@ public class MainPage extends AppCompatActivity
 
         this.setToolbar();
 
-        this.setUser();
         this.medicalRecordData = new ObservableLinkedList<>();
         this.stroke = new ObservableStroke(null);
 
@@ -183,6 +181,7 @@ public class MainPage extends AppCompatActivity
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".initializeStartup");
 
         this.medicalRecordModel = new Model_MedicalRecord(super.getApplicationContext());
+        this.userModel = new Model_User(super.getApplicationContext());
         this.initializeModel(new TaskDelegatable()
         {
             @Override
@@ -211,19 +210,36 @@ public class MainPage extends AppCompatActivity
         try
         {
             context = super.createPackageContext("id.ac.ub.filkom.se.kcv.astech.astechlauncher", 0);
-            final SharedPreferences pref = context.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
-            //this.user = new Entity_User(1, LocalDate.parse(pref.getString("date", "1993-12-16"), DateTimeFormat.forPattern("yyyy-MM-dd")), pref.getString("name", "Muhammad Syafiq"), pref.getString("email", "syafiq.rezpector@gmail.com"), pref.getString("password", "473bb7b11dd3c3a67a446f7743b4d3af"), true);
-            this.user = new Entity_User(1, LocalDate.parse("1993-12-16", DateTimeFormat.forPattern("yyyy-MM-dd")), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+            final SharedPreferences pref  = context.getSharedPreferences("CekLogin", Context.MODE_PRIVATE);
+            final String            email = pref.getString("email", null);
+            if((email != null))
+            {
+                final String name      = pref.getString("name", null);
+                final String password  = pref.getString("password", null);
+                final String birthdate = pref.getString("date", null);
 
-            Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : Data Shared");
+                if((this.user = this.userModel.getUserByEmail(email)) == null)
+                {
+                    Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : Register User Account");
+
+                    this.userModel.registerUser(name, birthdate, email, password);
+                }
+                else
+                {
+                    Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : Update User Account");
+
+                    this.userModel.updateUserAccount(this.user.getId(), name, birthdate, email, password);
+                }
+                this.user = this.userModel.getUserByEmail(email);
+            }
+            else
+            {
+                Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
+            }
         }
         catch(PackageManager.NameNotFoundException e)
         {
-            this.user = new Entity_User(1, LocalDate.parse("1993-12-16", DateTimeFormat.forPattern("yyyy-MM-dd")), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
-
             Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
-
-            Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : No Data Shared");
         }
 
         this.updateActivityState();
@@ -425,6 +441,7 @@ public class MainPage extends AppCompatActivity
             try
             {
                 MainPage.this.medicalRecordModel.open();
+                MainPage.this.userModel.open();
                 MainPage.this.updateActivityState();
             }
             catch(SQLException ignored)
@@ -441,6 +458,7 @@ public class MainPage extends AppCompatActivity
             Log.d(MainPage.CLASSNAME, MainPage.TAG + "." + StartUpTask.CLASSNAME + ".onPostExecute");
 
             this.progressDialog.dismiss();
+            MainPage.this.setUser();
             MainPage.this.updateMedicalRecordData();
             MainPage.this.getLatestMedicalRecordData();
             for(final TaskDelegatable delegation : this.delegations)
