@@ -111,7 +111,7 @@ public class Diagnose extends TitledFragment
             {
                 Diagnose.this.getUserAccount();
                 Diagnose.this.initializeMedicalRecordModel();
-                Diagnose.this.calculateUserAge();
+                Diagnose.this.setPredefinedUserAge();
                 Diagnose.this.createResultDialog();
                 Diagnose.this.generateFieldValidator();
                 Diagnose.this.setCalculateAction();
@@ -234,11 +234,23 @@ public class Diagnose extends TitledFragment
         });
     }
 
-    private void calculateUserAge()
+    private void setPredefinedUserAge()
+    {
+        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".setPredefinedUserAge");
+
+        if(this.user != null)
+        {
+            this.ageForm.setText(String.valueOf(this.calculateUserAge(this.user.getBirthDate())));
+            this.ageForm.setEnabled(false);
+            this.ageForm.setFocusable(false);
+        }
+    }
+
+    private int calculateUserAge(LocalDate birthDate)
     {
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".calculateUserAge");
 
-        this.ageForm.setText(String.valueOf(Years.yearsBetween(this.user.getBirthDate(), new LocalDate()).getYears()));
+        return Years.yearsBetween(birthDate, new LocalDate()).getYears();
     }
 
     private void initializeMedicalRecordModel()
@@ -357,7 +369,10 @@ public class Diagnose extends TitledFragment
                     this.changeResultContent(R.string.mainpage_viewpager_medical_record_status_danger, R.drawable.mainpage_viewpager_diagnose_result_content_icon_danger);
                 }
                 this.resultDialog.show();
-                this.medicalRecordModel.storeMedicalRecordByUser(this.user.getId(), record, metadata);
+                if(this.user != null)
+                {
+                    this.medicalRecordModel.storeMedicalRecordByUser(this.user.getId(), record, metadata);
+                }
                 this.root.updateStroke(record, metadata);
                 this.root.updateMedicalRecordData();
             }

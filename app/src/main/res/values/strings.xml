@@ -46,4 +46,5 @@
     <string name="dummy_text_8_char">OOOOOOOO</string>
     <string name="dummy_content_description">This is dummy content description</string>
     <string name="mainpage_database_loading_announcement">Defining the database, please wait...</string>
+    <string name="mainpage_limited_mode">This app is run in limited mode. Please login to get full functionality.</string>
 </resources>
