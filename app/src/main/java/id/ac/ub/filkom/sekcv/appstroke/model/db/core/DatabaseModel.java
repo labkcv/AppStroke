@@ -21,7 +21,7 @@ public class DatabaseModel
     public DatabaseModel(final Context context)
     {
         this.context = context;
-        this.dbHelper = new DatabaseHelper(context);
+        this.dbHelper = DatabaseHelper.getInstance(context);
     }
 
     public void open() throws SQLException

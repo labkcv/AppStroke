@@ -31,4 +31,15 @@ public final class DatabaseContract
         public static final String COLUMN_NAME_STATUS       = "status";
         public static final String COLUMN_NAME_TIME         = "time";
     }
+
+    /* Inner class that defines the table contents */
+    public static class User implements BaseColumns
+    {
+        public static final String TABLE_NAME            = "user";
+        public static final String COLUMN_NAME_ID        = "id";
+        public static final String COLUMN_NAME_NAME      = "name";
+        public static final String COLUMN_NAME_EMAIL     = "email";
+        public static final String COLUMN_NAME_PASSWORD  = "password";
+        public static final String COLUMN_NAME_BIRTHDATE = "birthdate";
+    }
 }
