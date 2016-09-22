@@ -25,6 +25,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -219,7 +220,7 @@ public class MainPage extends AppCompatActivity
         }
         catch(PackageManager.NameNotFoundException e)
         {
-            this.user = new Entity_User(1, LocalDate.parse("1993-12-16"), "Muhammad Syafiq", "syafiq.rezpector@gmail.com", "473bb7b11dd3c3a67a446f7743b4d3af", true);
+            Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
 
             Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setUser : No Data Shared");
         }
@@ -335,7 +336,14 @@ public class MainPage extends AppCompatActivity
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateMedicalRecordData");
 
-        this.medicalRecordData.replaceList(this.medicalRecordModel.getDataByUser(this.user.getId()));
+        if(this.user != null)
+        {
+            this.medicalRecordData.replaceList(this.medicalRecordModel.getDataByUser(this.user.getId()));
+        }
+        else
+        {
+            this.medicalRecordData.replaceList(new ArrayList<Entity_MedicalRecord>(0));
+        }
     }
 
     private synchronized void initializeModel(TaskDelegatable... delegations)
@@ -366,7 +374,7 @@ public class MainPage extends AppCompatActivity
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateActivityState");
 
-        this.isActivityReady = (this.user != null) && (this.medicalRecordModel != null) && this.medicalRecordModel.isDatabaseReady();
+        this.isActivityReady = (this.medicalRecordModel != null) && this.medicalRecordModel.isDatabaseReady();
     }
 
     //----------------------------------------------------------------------------------------------
