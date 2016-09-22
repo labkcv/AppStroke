@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
 import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.R2;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Treatment;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
@@ -171,37 +172,37 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     {
         final Context context;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_item_swipe)
+        @BindView(R2.id.mainpage_viewpager_medical_record_item_swipe)
         SwipeLayout swipeLayout;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localdate)
+        @BindView(R2.id.mainpage_viewpager_medical_record_simple_text_view_localdate)
         TextView    localDate;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_localtime)
+        @BindView(R2.id.mainpage_viewpager_medical_record_simple_text_view_localtime)
         TextView    localTime;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_year)
+        @BindView(R2.id.mainpage_viewpager_medical_record_simple_text_view_year)
         TextView    year;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_image_view_level_icon)
+        @BindView(R2.id.mainpage_viewpager_medical_record_simple_image_view_level_icon)
         ImageView   simpleIcon;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_simple_text_view_result)
+        @BindView(R2.id.mainpage_viewpager_medical_record_simple_text_view_result)
         TextView    result;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_image_view_level_icon)
+        @BindView(R2.id.mainpage_viewpager_medical_record_detail_image_view_level_icon)
         ImageView   detailIcon;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_cholesterol)
+        @BindView(R2.id.mainpage_viewpager_medical_record_detail_text_view_cholesterol)
         TextView    cholesterol;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_hdl)
+        @BindView(R2.id.mainpage_viewpager_medical_record_detail_text_view_hdl)
         TextView    hdl;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_ldl)
+        @BindView(R2.id.mainpage_viewpager_medical_record_detail_text_view_ldl)
         TextView    ldl;
         @Nullable
-        @BindView(R.id.mainpage_viewpager_medical_record_detail_text_view_triglyceride)
+        @BindView(R2.id.mainpage_viewpager_medical_record_detail_text_view_triglyceride)
         TextView    triglyceride;
 
         public SimpleViewHolder(View itemView, final Context context)
@@ -212,7 +213,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         }
 
         @Optional
-        @OnClick(R.id.mainpage_viewpager_medical_record_item_go_to_detail)
+        @OnClick(R2.id.mainpage_viewpager_medical_record_item_go_to_detail)
         public void onGoToDetailInitiated()
         {
             if(this.swipeLayout != null)
@@ -222,7 +223,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         }
 
         @Optional
-        @OnClick(R.id.mainpage_viewpager_medical_record_item_go_to_simple)
+        @OnClick(R2.id.mainpage_viewpager_medical_record_item_go_to_simple)
         public void onGoToSimpleInitiated()
         {
             if(this.swipeLayout != null)

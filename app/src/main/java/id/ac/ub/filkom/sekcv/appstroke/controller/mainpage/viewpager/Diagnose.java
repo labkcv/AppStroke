@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import id.ac.ub.filkom.sekcv.appstroke.R;
+import id.ac.ub.filkom.sekcv.appstroke.R2;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.SVM;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
@@ -60,12 +61,12 @@ public class Diagnose extends TitledFragment
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
     public static final int    ID        = 0b001;
 
-    public                                                            TextView         resultText;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_age)          MaterialEditText ageForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_cholesterol)  MaterialEditText cholesterolForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_hdl)          MaterialEditText hdlForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_ldl)          MaterialEditText ldlForm;
-    @BindView(R.id.mainpage_viewpager_diagnose_edittext_triglyceride) MaterialEditText triglycerideForm;
+    public                                                             TextView         resultText;
+    @BindView(R2.id.mainpage_viewpager_diagnose_edittext_age)          MaterialEditText ageForm;
+    @BindView(R2.id.mainpage_viewpager_diagnose_edittext_cholesterol)  MaterialEditText cholesterolForm;
+    @BindView(R2.id.mainpage_viewpager_diagnose_edittext_hdl)          MaterialEditText hdlForm;
+    @BindView(R2.id.mainpage_viewpager_diagnose_edittext_ldl)          MaterialEditText ldlForm;
+    @BindView(R2.id.mainpage_viewpager_diagnose_edittext_triglyceride) MaterialEditText triglycerideForm;
 
     private Unbinder            unbinder;
     private DialogPlus          resultDialog;
@@ -328,7 +329,7 @@ public class Diagnose extends TitledFragment
         this.resultDialog.dismiss();
     }
 
-    @OnClick(R.id.mainpage_viewpager_diagnose_button_calculate)
+    @OnClick(R2.id.mainpage_viewpager_diagnose_button_calculate)
     public void onCalculatePressed()
     {
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCalculatePressed");
