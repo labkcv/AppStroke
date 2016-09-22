@@ -28,8 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/mainpage_viewpager_medical_record_content_description_detail_level"
-                android:src="@drawable/dummy_image_48"/>
+                android:contentDescription="@string/mainpage_viewpager_medical_record_content_description_detail_level"/>
 
             <TextView
                 android:id="@+id/mainpage_viewpager_treatment_text_view_level_status"
@@ -37,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/dummy_text_medium"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/custom_material_grey_300"/>
         </LinearLayout>
@@ -71,7 +69,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/mainpage_viewpager_medical_record_label_cholesterol"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="10sp"/>
@@ -89,7 +86,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
-                        android:text="@string/dummy_text_8_char"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="16sp"/>
@@ -107,7 +103,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/mainpage_viewpager_medical_record_label_hdl"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="10sp"/>
@@ -125,7 +120,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
-                        android:text="@string/dummy_text_8_char"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="16sp"/>
@@ -152,7 +146,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/mainpage_viewpager_medical_record_label_ldl"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="10sp"/>
@@ -170,7 +163,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
-                        android:text="@string/dummy_text_8_char"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="16sp"/>
@@ -188,7 +180,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/mainpage_viewpager_medical_record_label_triglyceride"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="10sp"/>
@@ -206,7 +197,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
-                        android:text="@string/dummy_text_8_char"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/custom_material_grey_300"
                         android:textSize="16sp"/>
