@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/Lab_KCV_AppStroke.iml" filepath="$PROJECT_DIR$/Lab_KCV_AppStroke.iml" />
       <module fileurl="file://$PROJECT_DIR$/../MaterialEditText/library/MaterialEditText.iml" filepath="$PROJECT_DIR$/../MaterialEditText/library/MaterialEditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
