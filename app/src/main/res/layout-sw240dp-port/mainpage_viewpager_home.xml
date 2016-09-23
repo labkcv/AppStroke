@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/dummy_text_title"
+                android:text="@string/mainpage_viewpager_home_disease_title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
-                android:text="@string/dummy_text_3_paragraph"/>
+                android:text="@string/mainpage_viewpager_home_disease_description"/>
         </LinearLayout>
     </ScrollView>
 
