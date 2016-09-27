@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AppStroke</string>
+    <string name="appstroke_app_name">AppStroke</string>
     <string name="test_validator">Test ID Validator</string>
     <string name="mainpage_viewpager_diagnose_validator_nonempty">Form tidak boleh kosong !</string>
     <string name="mainpage_viewpager_diagnose_validator_numerical">Nilai error !</string>
