@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppStroke</string>
+    <string name="appstroke_app_name">AppStroke</string>
     <string name="action_settings">Settings</string>
     <string name="mainpage_toolbar_logo_desc">AppStroke Logo</string>
     <string name="mainpage_toolbar_title">App Stroke</string>
