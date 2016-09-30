@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/dummy_content_description"
-        android:src="@drawable/dummy_image_128"/>
+        android:src="@drawable/mainpage_viewpager_diagnose_result_content_icon_high"/>
 
     <TextView
         android:layout_width="wrap_content"

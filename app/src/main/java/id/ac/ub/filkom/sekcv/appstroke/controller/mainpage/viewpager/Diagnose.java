@@ -19,9 +19,6 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import org.joda.time.LocalDate;
-import org.joda.time.Years;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Collections;
@@ -260,17 +257,10 @@ public class Diagnose extends TitledFragment
 
         if(this.user != null)
         {
-            this.ageForm.setText(String.valueOf(this.calculateUserAge(this.user.getBirthDate())));
+            this.ageForm.setText(String.valueOf(this.root.getUserAge()));
             this.ageForm.setEnabled(false);
             this.ageForm.setFocusable(false);
         }
-    }
-
-    private int calculateUserAge(LocalDate birthDate)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".calculateUserAge");
-
-        return Years.yearsBetween(birthDate, new LocalDate()).getYears();
     }
 
     private void initializeMedicalRecordModel()

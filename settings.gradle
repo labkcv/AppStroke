@@ -1,3 +1,2 @@
-include ':app', ':test'
-include ':MaterialEditText'
+include ':app', ':MaterialEditText'
 project(':MaterialEditText').projectDir = new File(settingsDir, '../MaterialEditText/library')

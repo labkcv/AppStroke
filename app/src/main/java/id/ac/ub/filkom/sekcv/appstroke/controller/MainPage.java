@@ -21,6 +21,12 @@ import android.widget.Toast;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
+import org.joda.time.Years;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,6 +65,7 @@ public class MainPage extends AppCompatActivity
     private Model_MedicalRecord                        medicalRecordModel;
     private Model_User                                 userModel;
     private boolean                                    isActivityReady;
+    private int                                        age;
 
     //----------------------------------------------------------------------------------------------
     //---App Life Cycle
@@ -231,6 +238,10 @@ public class MainPage extends AppCompatActivity
                     this.userModel.updateUserAccount(this.user.getId(), name, birthdate, email, password);
                 }
                 this.user = this.userModel.getUserByEmail(email);
+                if(this.user != null)
+                {
+                    this.age = this.calculateUserAge(this.user.getBirthDate());
+                }
             }
             else
             {
@@ -392,6 +403,32 @@ public class MainPage extends AppCompatActivity
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateActivityState");
 
         this.isActivityReady = (this.medicalRecordModel != null) && this.medicalRecordModel.isDatabaseReady();
+    }
+
+    /**
+     * According to TestJodaTime#testYearsBetween unit testing
+     *
+     * @param birthDate : User birth date
+     * @return : User age
+     */
+    public int calculateUserAge(@NonNull final LocalDate birthDate)
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".calculateUserAge");
+
+        final LocalDateTime birthTimestamp  = birthDate.toLocalDateTime(LocalTime.MIDNIGHT);
+        final LocalDateTime nowTimestamp    = LocalDateTime.now();
+        int                 age             = Years.yearsBetween(birthTimestamp, nowTimestamp).getYears();
+        final int           secondDifferent = Seconds.secondsBetween(birthTimestamp.plusYears(age), nowTimestamp).getSeconds();
+        if(secondDifferent > 0)
+        {
+            ++age;
+        }
+        return age;
+    }
+
+    public int getUserAge()
+    {
+        return this.age;
     }
 
     //----------------------------------------------------------------------------------------------
