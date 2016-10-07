@@ -4,12 +4,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeMetadata;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.StrokeParameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseContract.MedicalRecord;
+import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseHelper;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseModel;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 
@@ -25,11 +31,13 @@ public class Model_MedicalRecord extends DatabaseModel
     public static final String CLASSNAME = "Model_MedicalRecord";
     public static final String CLASSPATH = "model.db.model";
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
+    private DateTimeFormatter ageFormatter;
 
     public Model_MedicalRecord(final Context context)
     {
         super(context);
 
+        this.ageFormatter = DateTimeFormat.forPattern(DatabaseHelper.TIMESTAMP_FORMAT + "ZZ").withZone(DateTimeZone.getDefault());
         Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".constructor");
     }
 
@@ -40,16 +48,6 @@ public class Model_MedicalRecord extends DatabaseModel
         super.database.execSQL("" +
                         "INSERT INTO " + MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
                 new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus()});
-
-    }
-
-    public void storeMedicalRecordDummyByUser(int userID, StrokeParameter parameter, StrokeMetadata metadata, String timestamp)
-    {
-        Log.d(Model_MedicalRecord.CLASSNAME, Model_MedicalRecord.TAG + ".storeMedicalRecordDummyByUser");
-
-        super.database.execSQL("" +
-                        "INSERT INTO " + MedicalRecord.TABLE_NAME + " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
-                new Object[] {userID, parameter.getAge(), parameter.getCholesterol(), parameter.getHdl(), parameter.getLdl(), parameter.getTriglyceride(), metadata.getStatus(), timestamp});
 
     }
 
@@ -113,7 +111,7 @@ public class Model_MedicalRecord extends DatabaseModel
                         cursor.getDouble(5),
                         cursor.getDouble(6),
                         cursor.getInt(7),
-                        cursor.getString(8)
+                        DateTime.parse(cursor.getString(8) + "+00:00", this.ageFormatter)
                 ));
             }
             while(cursor.moveToNext());
