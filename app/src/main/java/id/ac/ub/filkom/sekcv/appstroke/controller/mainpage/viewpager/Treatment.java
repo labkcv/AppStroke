@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,7 +41,8 @@ public class Treatment extends TitledFragment
     public static final String CLASSNAME = "Treatment";
     public static final String CLASSPATH = "controller.mainpage.viewpager";
     public static final String TAG       = CLASSPATH + "." + CLASSNAME;
-    public static final int    ID        = 0b100;
+    public static final int    ID_PRO    = 0b100;
+    public static final int    ID_FREE   = 0b010;
 
     private TextView   cholesterol;
     private TextView   hdl;
@@ -70,14 +70,6 @@ public class Treatment extends TitledFragment
     //----------------------------------------------------------------------------------------------
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onCreate");
-
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onCreateView");
@@ -101,92 +93,12 @@ public class Treatment extends TitledFragment
     }
 
     @Override
-    public void onAttach(Context context)
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onAttach");
-
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDestroyView()
     {
         Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onDestroyView");
 
         this.root.getStrokeData().deleteObserver(this.strokeObserver);
         super.onDestroyView();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onActivityCreated");
-
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onStart");
-
-        super.onStart();
-    }
-
-    @Override
-    public void onResume()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onResume");
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onPause");
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onStop");
-
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onSaveInstanceState");
-
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onViewStateRestored");
-
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onDestroy");
-
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach()
-    {
-        Log.d(Treatment.CLASSNAME, Treatment.TAG + ".onDetach");
-
-        super.onDetach();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -236,10 +148,6 @@ public class Treatment extends TitledFragment
             this.triglyceride.setText(String.format(locale, "%.3f", medicalRecord.getTriglyceride()));
             this.getStatusDescription(this.status, this.icon, stroke.getMetadata().getStatus());
             this.displayTreatment(stroke.getMetadata().getStatus());
-        }
-        else
-        {
-            Toast.makeText(super.getContext(), super.getResources().getString(R.string.mainpage_viewpager_medical_treatment_data_not_defined), Toast.LENGTH_SHORT).show();
         }
     }
 
