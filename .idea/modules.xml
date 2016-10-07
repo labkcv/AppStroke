@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppStroke.iml" filepath="$PROJECT_DIR$/AppStroke.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../MaterialEditText/library/MaterialEditText.iml" filepath="$PROJECT_DIR$/../MaterialEditText/library/MaterialEditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MPAndroidChart/MPChartLib/chart.iml" filepath="$PROJECT_DIR$/../MPAndroidChart/MPChartLib/chart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MaterialEditText/library/mte.iml" filepath="$PROJECT_DIR$/../MaterialEditText/library/mte.iml" />
     </modules>
   </component>
 </project>

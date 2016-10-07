@@ -11,11 +11,13 @@ public class Parameter
 {
     private String key;
     private String name;
+    private int    color;
 
-    public Parameter(final String key, final String name)
+    public Parameter(final String key, final String name, final int color)
     {
         this.key = key;
         this.name = name;
+        this.color = color;
     }
 
     public String getName()
@@ -36,6 +38,16 @@ public class Parameter
     public void setKey(final String key)
     {
         this.key = key;
+    }
+
+    public int getColor()
+    {
+        return color;
+    }
+
+    public void setColor(int color)
+    {
+        this.color = color;
     }
 
     @Override

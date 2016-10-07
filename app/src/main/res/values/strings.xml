@@ -1,17 +1,17 @@
 <resources>
-    <string name="appstroke_app_name">AppStroke</string>
+    <string name="appstroke_app_name" translatable="false">AppStroke</string>
     <string name="action_settings">Settings</string>
     <string name="mainpage_toolbar_logo_desc">AppStroke Logo</string>
-    <string name="mainpage_toolbar_title">App Stroke</string>
-    <string name="dummy_text_3_paragraph">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis neque id dui fermentum, eget mattis nisi rhoncus. Nam quis turpis tristique, euismod libero eu, euismod dui. Etiam dignissim volutpat felis vitae consectetur. Duis ut dictum eros. Vivamus ornare sagittis enim, nec efficitur felis molestie ac. Mauris consectetur enim quis neque cursus, vitae dapibus massa mollis. Sed bibendum laoreet dui, ac facilisis risus suscipit sit amet. Etiam et hendrerit mauris. Fusce id lorem lacus.\n\n\tVivamus consequat mi lorem, quis vestibulum tortor laoreet a. Ut lectus risus, pretium sed sagittis vel, posuere at mauris. Mauris consectetur tempor libero eget dictum. Donec laoreet lectus non lectus imperdiet feugiat. Sed id justo purus. Donec et nunc mattis, pellentesque ante vitae, rhoncus est. Sed ultricies, nisi non facilisis aliquam, sapien ex laoreet sapien, eget rhoncus nunc augue in erat. Praesent imperdiet urna nec ex gravida fermentum. Integer non volutpat ligula, vitae congue tellus. Sed eu porttitor risus, et imperdiet augue. Suspendisse enim nibh, dignissim at nulla sodales, accumsan sagittis magna. Aliquam nisl ligula, facilisis et nunc in, interdum porta augue. Praesent erat sem, porta in eros in, ullamcorper ornare augue.\n\n\tAliquam sem sapien, finibus sit amet est eu, porttitor vulputate dui. Mauris gravida eu tellus vel convallis. Donec tortor nibh, ornare ut velit consequat, egestas fringilla quam. Fusce scelerisque tincidunt arcu sed tempus. Praesent rutrum commodo orci, sit amet convallis odio dictum nec. Cras consectetur ex orci, sed porttitor ex dignissim eu. Nunc rhoncus, enim vel convallis dignissim, mi magna aliquam purus, in pretium purus orci quis risus. Nam dictum sit amet risus at pellentesque. In luctus, leo non commodo sagittis, ipsum felis imperdiet tellus, ac ultrices urna turpis hendrerit tortor. Quisque fermentum nunc ante, id malesuada nisl porta id. Proin placerat, odio eu ultrices tristique, quam augue malesuada magna, sit amet convallis mi diam at metus. Donec pulvinar, felis quis sodales consequat, lectus sem consectetur magna, nec laoreet lacus leo a felis. Aenean a erat nec felis molestie placerat sed non ex. Sed et ullamcorper erat, nec molestie nulla. Etiam quis fermentum magna. Aenean id nisl nec risus porttitor egestas sit amet sed leo.</string>
-    <string name="dummy_text_1_paragraph">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis neque id dui fermentum, eget mattis nisi rhoncus. Nam quis turpis tristique, euismod libero eu, euismod dui</string>
+    <string name="mainpage_toolbar_title" translatable="false">App Stroke</string>
+    <string name="dummy_text_3_paragraph" translatable="false">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis neque id dui fermentum, eget mattis nisi rhoncus. Nam quis turpis tristique, euismod libero eu, euismod dui. Etiam dignissim volutpat felis vitae consectetur. Duis ut dictum eros. Vivamus ornare sagittis enim, nec efficitur felis molestie ac. Mauris consectetur enim quis neque cursus, vitae dapibus massa mollis. Sed bibendum laoreet dui, ac facilisis risus suscipit sit amet. Etiam et hendrerit mauris. Fusce id lorem lacus.\n\n\tVivamus consequat mi lorem, quis vestibulum tortor laoreet a. Ut lectus risus, pretium sed sagittis vel, posuere at mauris. Mauris consectetur tempor libero eget dictum. Donec laoreet lectus non lectus imperdiet feugiat. Sed id justo purus. Donec et nunc mattis, pellentesque ante vitae, rhoncus est. Sed ultricies, nisi non facilisis aliquam, sapien ex laoreet sapien, eget rhoncus nunc augue in erat. Praesent imperdiet urna nec ex gravida fermentum. Integer non volutpat ligula, vitae congue tellus. Sed eu porttitor risus, et imperdiet augue. Suspendisse enim nibh, dignissim at nulla sodales, accumsan sagittis magna. Aliquam nisl ligula, facilisis et nunc in, interdum porta augue. Praesent erat sem, porta in eros in, ullamcorper ornare augue.\n\n\tAliquam sem sapien, finibus sit amet est eu, porttitor vulputate dui. Mauris gravida eu tellus vel convallis. Donec tortor nibh, ornare ut velit consequat, egestas fringilla quam. Fusce scelerisque tincidunt arcu sed tempus. Praesent rutrum commodo orci, sit amet convallis odio dictum nec. Cras consectetur ex orci, sed porttitor ex dignissim eu. Nunc rhoncus, enim vel convallis dignissim, mi magna aliquam purus, in pretium purus orci quis risus. Nam dictum sit amet risus at pellentesque. In luctus, leo non commodo sagittis, ipsum felis imperdiet tellus, ac ultrices urna turpis hendrerit tortor. Quisque fermentum nunc ante, id malesuada nisl porta id. Proin placerat, odio eu ultrices tristique, quam augue malesuada magna, sit amet convallis mi diam at metus. Donec pulvinar, felis quis sodales consequat, lectus sem consectetur magna, nec laoreet lacus leo a felis. Aenean a erat nec felis molestie placerat sed non ex. Sed et ullamcorper erat, nec molestie nulla. Etiam quis fermentum magna. Aenean id nisl nec risus porttitor egestas sit amet sed leo.</string>
+    <string name="dummy_text_1_paragraph" translatable="false">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis neque id dui fermentum, eget mattis nisi rhoncus. Nam quis turpis tristique, euismod libero eu, euismod dui</string>
     <string name="mainpage_viewpager_home_logo_description">Logo Description</string>
     <string name="dummy_text_title">Dummy Title</string>
     <string name="mainpage_viewpager_diagnose_question_title">Input your health data here !</string>
     <string name="mainpage_viewpager_diagnose_label_age">Age</string>
     <string name="mainpage_viewpager_diagnose_label_cholesterol">Cholesterol</string>
-    <string name="mainpage_viewpager_diagnose_label_hdl">HDL</string>
-    <string name="mainpage_viewpager_diagnose_label_ldl">LDL</string>
+    <string name="mainpage_viewpager_diagnose_label_hdl" translatable="false">HDL</string>
+    <string name="mainpage_viewpager_diagnose_label_ldl" translatable="false">LDL</string>
     <string name="mainpage_viewpager_diagnose_label_triglyceride">Triglyceride</string>
     <string name="mainpage_viewpager_diagnose_button_submit">Calculate</string>
     <string name="mainpage_viewpager_diagnose_button_showresult">Show Previous Result</string>
@@ -24,8 +24,8 @@
     <string name="mainpage_viewpager_diagnose_result_footer_label_info">Ps : You can check result detail on \"Treatment\" Page</string>
     <string name="mainpage_viewpager_diagnose_label_age_helper">Enter your age data</string>
     <string name="mainpage_viewpager_diagnose_label_cholesterol_helper">Enter your cholesterol level</string>
-    <string name="mainpage_viewpager_diagnose_label_hdl_helper">Enter your hdl level</string>
-    <string name="mainpage_viewpager_diagnose_label_ldl_helper">Enter your ldl level</string>
+    <string name="mainpage_viewpager_diagnose_label_hdl_helper">Enter your HDL level</string>
+    <string name="mainpage_viewpager_diagnose_label_ldl_helper">Enter your LDL level</string>
     <string name="mainpage_viewpager_diagnose_label_triglyceride_helper">Enter your triglyceride level</string>
     <string name="test_validator">Test EN Validator</string>
     <string name="mainpage_viewpager_diagnose_validator_nonempty">Field cannot be empty !</string>
@@ -33,20 +33,48 @@
     <string name="mainpage_viewpager_diagnose_validator_range" formatted="false">Value must greater than %s and less than %s !</string>
     <string name="mainpage_viewpager_label_error_db">Cannot initialize database, now exiting !</string>
     <string name="mainpage_viewpager_medical_record_label_cholesterol">Cholesterol</string>
-    <string name="mainpage_viewpager_medical_record_label_hdl">HDL</string>
-    <string name="mainpage_viewpager_medical_record_label_ldl">LDL</string>
+    <string name="mainpage_viewpager_medical_record_label_hdl" translatable="false">HDL</string>
+    <string name="mainpage_viewpager_medical_record_label_ldl" translatable="false">LDL</string>
     <string name="mainpage_viewpager_medical_record_label_triglyceride">Triglyceride</string>
     <string name="mainpage_viewpager_medical_record_label_year" formatted="false">%d years old</string>
     <string name="mainpage_viewpager_medical_record_content_description_go_to_simple">Go To Simple</string>
     <string name="mainpage_viewpager_medical_record_content_description_detail_level">Detail Icon</string>
     <string name="mainpage_viewpager_medical_record_content_description_go_detail">Go To Detail</string>
-    <string name="mainpage_viewpager_medical_treatment_data_not_defined">"Data not defined, insert data first !"</string>
-    <string name="mainpage_viewpager_medical_record_content_description_simple_level">@string/mainpage_viewpager_medical_record_content_description_detail_level</string>
+    <string name="mainpage_viewpager_medical_treatment_data_not_defined">Data not defined, insert data first !</string>
+    <string name="mainpage_viewpager_medical_record_content_description_simple_level" translatable="false">@string/mainpage_viewpager_medical_record_content_description_detail_level</string>
     <string name="dummy_text_medium">This Is Medium</string>
-    <string name="dummy_text_8_char">OOOOOOOO</string>
+    <string name="dummy_text_8_char" translatable="false">OOOOOOOO</string>
     <string name="dummy_content_description">This is dummy content description</string>
-    <string name="mainpage_database_loading_announcement">Defining the database, please wait...</string>
+    <string name="mainpage_database_loading_announcement">Defining the database, please wait…</string>
     <string name="mainpage_limited_mode">This app is run in limited mode. Please login to get full functionality.</string>
-    <string name="mainpage_viewpager_home_disease_description">Stroke adalah kondisi yang terjadi ketika pasokan darah ke otak terputus akibat penyumbatan atau pecahnya pembuluh darah, sehingga terjadi kematian sel-sel pada sebagian area di otak.\\n\\nGejala Stroke \\n\\nIngatlah gejala stroke berikut ini agar dapat melakukan tindakan yang tepat.\\n1. Cara bicara penderita tidak jelas atau kacau, bahkan ada juga penderita yang tidak bisa bicara sama sekali walau mereka terlihat sadar\\n2. Mata dan mulut pada salah satu sisi wajah penderita terlihat turun \\n3.Lengan si penderita mengalami kelumpuhan saat terserang stroke, karena itu mereka tidak mampu mengangkat salah satu atau bahkan kedua lengannya\\n\\nPenyebab Stroke\\n\\n1. Obesitas\\nBerat badan berlebih bisa menyebabkan penderitanya akan mengalami masalah pada aliran darahnya. Banyaknya lemak di dalam tubuh bisa dialami pada penderita obesitas, dan obesitas di sebabkan akibat dari makan makanan yang mengandung tinggi lemak, sehingga lemak yang menumpuk di dalam tubuh juga akan menjadi penghambat jalan bagi darah.\\n2. Rokok\\nRokok bisa menjadi penyebab stroke karena kandungan yang dimiliki rokok bisa membuat otak tidak mendapatkan cukup aliran darah. maka dari itu risiko perokok aktif sangat tinggi untuk menderita sakit stroke.\\n3. Alkohol\\nMinum minuman yang mengandung alkohol bisa meningkatkan tekanan darah dan akan membuat aliran darah pada otak terhenti sehingga syaraf otak terganggu sehingga sakit stroke akan dialami dalam seketika saja.\\n4. Kadar kolesterol tinggi\\nKadar kolesterol yang tinggi dan tidak kunjung sembuh akan menghambat aliran darah, karena kolesterol yang begitu banyak di dalam tubuh akan mengecilkan pembuluh darah, sehingga memiliki kadar kolesterol yang tinggi bisa menyebabkan sakit stroke.\\n5. Genetik\\nFaktor genetik juga dapat menyebabkan stroke,keluarga yang menderita sakit stroke juga bisa membuat anggota keluarga lainnya juga akan memiliki menderita sakit stroke juga terlebih apabila tidak menjaga kesehatan tubuhnya dengan baik.\\n6. Gula darah\\nPenyebab stroke juga bisa disebabkan oleh memiliki gula darah tinggi. tidak mengontrol kadar gula darah di dalam tubuh juga akan menyebabkan penyakit stroke lama kelamaan. Maka dari itu menjaga kadar gula darah tetap stabil juga sangat penting.</string>
-    <string name="mainpage_viewpager_home_disease_title">Stroke</string>
+    <string name="mainpage_viewpager_home_disease_description">Stroke is a condition that occurs when the blood supply to the brain is cut off by a blockage or rupture of blood vessels, resulting in the death of cells in certain parts of the brain.\n\nSymptoms of Stroke \n\nRemember the following symptoms of a stroke in order to take appropriate action.\n1. How to talk to the patients is not clear or garbled, and even some patients who can not talk at all, although they are awake\n2. Eyes and mouth on one side of the patient\'s face looks down \n3.Lengan patient suffered paralysis as a stroke, because it they are not able to lift one or both arms\n\nCause of Stroke\n\n1. Obesity\nExcess body weight can cause the sufferer will experience problems in the flow of blood. Number of fat in the body can be experienced in patients with obesity, and obesity is caused as a result of eating foods that contain high fat, so fat that accumulates in the body will also be a roadblock for blood.\n2. Cigarette\nSmoking may be a cause of stroke because the content is owned cigarette can make the brain is not getting enough blood flow. therefore the risk of active smokers is very high for the sick stroke.\n3.Alcohol\nDrink beverages containing alcohol can raise blood pressure and make blood flow in the brain ceases until nerve pain so that the brain is interrupted stroke will experience a moment in time.\n4. High cholesterol\nHigh cholesterol levels and will not heal impede the flow of blood, because cholesterol is so much in the body will shrink the blood vessels, thus having high cholesterol can lead to stroke pain.\n5. Genetics\nGenetic factors also can lead to stroke, the family suffered a stroke can also make other family members will also have suffered a stroke as well when not in keeping with his good health.\n6. Blood sugar \nBlood sugar can causes a stroke can also be caused by having high blood sugar. does not control blood sugar levels in the body also cause strokes over time. Therefore keep your blood sugar stable is also very important</string>
+    <string name="mainpage_viewpager_home_disease_title" translatable="false">Stroke</string>
+    <string name="mainpage_fragment_title_home">Home</string>
+    <string name="mainpage_fragment_title_diagnose">Diagnose</string>
+    <string name="mainpage_fragment_title_medical_record">Medical Record</string>
+    <string name="mainpage_fragment_title_treatment">Treatment</string>
+    <string name="mainpage_fragment_title_chart">Chart</string>
+    <string name="mainpage_toolbar_menu_help">Help</string>
+    <string name="mainpage_toolbar_menu_about_us">About Us</string>
+    <string name="helppage_toolbar_title">Help</string>
+    <string name="helppage_content_slide_1_title">Home Page</string>
+    <string name="helppage_content_slide_1_description">This page describe overview of stroke disease and its common treatment.</string>
+    <string name="helppage_content_slide_2_title">Diagnose Page</string>
+    <string name="helppage_content_slide_2_description">This page contains a form to detect stroke. There are five required data that is age, cholesterol, HDL, LDL, and triglyceride.</string>
+    <string name="helppage_content_slide_3_title">Medical Record Page</string>
+    <string name="helppage_content_slide_4_title">Chart Page</string>
+    <string name="helppage_content_slide_5_title">Treatment Page</string>
+    <string name="helppage_content_slide_6_title">Help Page</string>
+    <string name="helppage_content_slide_7_title">About Us Page</string>
+    <string name="helppage_content_slide_3_description">This page displays all user\'s stroke data previously recorded.</string>
+    <string name="helppage_content_slide_4_description">This page displays all user\'s stroke data previously recorded in chart way.</string>
+    <string name="helppage_content_slide_5_description">This page display stroke treatment according to its data.</string>
+    <string name="helppage_content_slide_6_description">This page describe how to use this app.</string>
+    <string name="helppage_content_slide_7_description">This page describe our identity.</string>
+    <string name="aboutuspage_toolbar_title">About Us</string>
+    <string name="aboutuspage_textview_copyright" formatted="false" translatable="false">Copyright © SE KCV %d</string>
+    <string name="aboutuspage_imageview_desc_logo" translatable="false">@string/dummy_content_description</string>
+    <string name="aboutuspage_textview_about_description">An application of Lab KC FILKOM UB containing various intelligence applications to solve existing problems</string>
+    <string name="aboutuspage_imageview_desc_filkom_logo" translatable="false">@string/dummy_content_description</string>
+    <string name="aboutuspage_imageview_desc_ub_logo" translatable="false">@string/dummy_content_description</string>
 </resources>

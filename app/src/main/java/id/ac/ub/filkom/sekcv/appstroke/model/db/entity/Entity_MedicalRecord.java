@@ -1,5 +1,7 @@
 package id.ac.ub.filkom.sekcv.appstroke.model.db.entity;
 
+import org.joda.time.DateTime;
+
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.db.entity> created by :
  * Name         : syafiq
@@ -9,22 +11,22 @@ package id.ac.ub.filkom.sekcv.appstroke.model.db.entity;
  */
 public class Entity_MedicalRecord
 {
-    private final int    id;
-    private final int    user;
-    private final int    age;
-    private final String time;
-    private       double cholesterol;
-    private       double hdl;
-    private       double ldl;
-    private       double triglyceride;
-    private       int    status;
+    private final int      id;
+    private final int      user;
+    private final int      age;
+    private final DateTime time;
+    protected     double   cholesterol;
+    protected     double   hdl;
+    protected     double   ldl;
+    protected     double   triglyceride;
+    private       int      status;
 
-    public Entity_MedicalRecord(int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
+    public Entity_MedicalRecord(int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, DateTime time)
     {
         this(-1, user, age, cholesterol, hdl, ldl, triglyceride, status, time);
     }
 
-    public Entity_MedicalRecord(int id, int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, String time)
+    public Entity_MedicalRecord(int id, int user, int age, double cholesterol, double hdl, double ldl, double triglyceride, int status, DateTime time)
     {
         this.id = id;
         this.user = user;
@@ -52,7 +54,7 @@ public class Entity_MedicalRecord
         return age;
     }
 
-    public String getTime()
+    public DateTime getTime()
     {
         return time;
     }
