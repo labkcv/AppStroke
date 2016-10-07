@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 24//Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-    buildToolsVersion "24.0.2"//project.ANDROID_BUILD_TOOLS_VERSION
+    buildToolsVersion "24.0.3"//project.ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
         //applicationId "id.ac.ub.filkom.se.kcv.astech.medical.appstroke"
@@ -24,13 +24,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
-    compile 'com.orhanobut:dialogplus:1.11@aar'
-    compile 'net.danlew:android.joda:2.9.4.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
-    compile "com.daimajia.swipelayout:library:1.2.0@aar"
-    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
-    compile project(":MaterialEditText")
-    compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.android.support:cardview-v7:24.2.1'
+    compile 'com.orhanobut:dialogplus:1.11@aar'
+    compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'net.danlew:android.joda:2.9.4.1'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+    compile project(":mte")
+    compile project(":chart")
 }

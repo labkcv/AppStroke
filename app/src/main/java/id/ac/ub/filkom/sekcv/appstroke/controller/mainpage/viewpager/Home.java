@@ -1,6 +1,5 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,14 +47,6 @@ public class Home extends TitledFragment
     //----------------------------------------------------------------------------------------------
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onCreate");
-
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         Log.d(Home.CLASSNAME, Home.TAG + ".onCreateView");
@@ -66,94 +57,6 @@ public class Home extends TitledFragment
         new StartUpTask().execute();
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context)
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onAttach");
-
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDestroyView()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onDestroyView");
-
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onActivityCreated");
-
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onStart");
-
-        super.onStart();
-    }
-
-    @Override
-    public void onResume()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onResume");
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onPause");
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onStop");
-
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(@Nullable Bundle outState)
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onSaveInstanceState");
-
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onViewStateRestored");
-
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onDestroy");
-
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach()
-    {
-        Log.d(Home.CLASSNAME, Home.TAG + ".onDetach");
-
-        super.onDetach();
     }
 
     //----------------------------------------------------------------------------------------------

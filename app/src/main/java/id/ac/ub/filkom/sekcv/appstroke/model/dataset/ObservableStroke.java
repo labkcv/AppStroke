@@ -40,8 +40,8 @@ public class ObservableStroke extends Observable
         {
             this.stroke = new Stroke(null, null);
         }
-        this.setParameter(parameter);
-        this.setMetadata(metadata);
+        this.stroke.setParameter(parameter);
+        this.stroke.setMetadata(metadata);
         this.update();
     }
 
@@ -56,7 +56,7 @@ public class ObservableStroke extends Observable
         this.update();
     }
 
-    public void setParameter(@NonNull StrokeParameter parameter)
+    public void updateParameter(@NonNull StrokeParameter parameter)
     {
         if(this.stroke == null)
         {
@@ -66,7 +66,7 @@ public class ObservableStroke extends Observable
         this.update();
     }
 
-    public void setMetadata(@NonNull StrokeMetadata metadata)
+    public void updateMetadata(@NonNull StrokeMetadata metadata)
     {
         if(this.stroke == null)
         {

@@ -13,11 +13,6 @@ import android.widget.TextView;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -26,7 +21,6 @@ import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Treatment;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Status;
 import id.ac.ub.filkom.sekcv.appstroke.model.dataset.Stroke;
-import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseHelper;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 
 /**
@@ -38,28 +32,15 @@ import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
  */
 public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapter.SimpleViewHolder>
 {
-    private final String DATE_FORMAT;
-    private final String TIME_FORMAT;
-    private final String TIMESTAMP_FORMAT;
-
+    private static final String DATE_FORMAT = "dd MMM yyy";
+    private static final String TIME_FORMAT = "HH:mm:ss";
     private final MainPage                   root;
     private final List<Entity_MedicalRecord> dataset;
-    private       DateTimeFormatter          ageFormatter;
 
     public RecyclerViewAdapter(MainPage root, List<Entity_MedicalRecord> objects)
     {
         this.dataset = objects;
         this.root = root;
-
-        this.DATE_FORMAT = "dd MMMM yyyy";
-        this.TIME_FORMAT = DatabaseHelper.TIME_FORMAT;
-        this.TIMESTAMP_FORMAT = DatabaseHelper.TIMESTAMP_FORMAT;
-        this.updateTimeFormatter();
-    }
-
-    public void updateTimeFormatter()
-    {
-        this.ageFormatter = DateTimeFormat.forPattern(this.TIMESTAMP_FORMAT + "ZZ").withZone(DateTimeZone.getDefault());
     }
 
     @Override
@@ -74,7 +55,6 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position)
     {
         final Entity_MedicalRecord medicalRecord = this.dataset.get(position);
-        final DateTime             dateTime      = DateTime.parse(medicalRecord.getTime() + "+00:00", this.ageFormatter);
         final Locale               locale        = Locale.getDefault();
         if(viewHolder.swipeLayout != null)
         {
@@ -82,11 +62,11 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         }
         if(viewHolder.localDate != null)
         {
-            viewHolder.localDate.setText(dateTime.toString(this.DATE_FORMAT));
+            viewHolder.localDate.setText(medicalRecord.getTime().toString(DATE_FORMAT));
         }
         if(viewHolder.localTime != null)
         {
-            viewHolder.localTime.setText(dateTime.toString(this.TIME_FORMAT));
+            viewHolder.localTime.setText(medicalRecord.getTime().toString(TIME_FORMAT));
         }
         if(viewHolder.year != null)
         {
@@ -101,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
                 public boolean onLongClick(View view)
                 {
                     RecyclerViewAdapter.this.root.updateStroke(Stroke.newInstanceFromMedicalRecord(RecyclerViewAdapter.this.dataset.get(position)));
-                    RecyclerViewAdapter.this.root.getViewPager().setCurrentItem(Treatment.ID);
+                    RecyclerViewAdapter.this.root.getViewPager().setCurrentItem(Treatment.ID_PRO);
                     return false;
                 }
             });

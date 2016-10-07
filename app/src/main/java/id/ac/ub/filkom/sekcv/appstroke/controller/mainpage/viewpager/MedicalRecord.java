@@ -1,9 +1,7 @@
 package id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,7 +48,7 @@ public class MedicalRecord extends TitledFragment
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static MedicalRecord newInstance(String title)
     {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "newInstance");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + ".newInstance");
 
         final MedicalRecord fragment = new MedicalRecord();
         fragment.setTitle(title);
@@ -62,17 +60,9 @@ public class MedicalRecord extends TitledFragment
     //----------------------------------------------------------------------------------------------
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreate");
-
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onCreateView");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + ".onCreateView");
 
         this.container = inflater.inflate(R.layout.mainpage_viewpager_medical_record, container, false);
         this.root = ((MainPage) super.getActivity());
@@ -92,92 +82,12 @@ public class MedicalRecord extends TitledFragment
     }
 
     @Override
-    public void onAttach(Context context)
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onAttach");
-
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDestroyView()
     {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroyView");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + ".onDestroyView");
 
-        this.root.getMedicalRecordData().deleteObserver(MedicalRecord.this.medicalRecordObserver);
+        this.root.getMedicalRecordData().deleteObserver(this.medicalRecordObserver);
         super.onDestroyView();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onActivityCreated");
-
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStart");
-
-        super.onStart();
-    }
-
-    @Override
-    public void onResume()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onResume");
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onPause");
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onStop");
-
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onSaveInstanceState");
-
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onViewStateRestored");
-
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDestroy");
-
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach()
-    {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "onDetach");
-
-        super.onDetach();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -186,7 +96,7 @@ public class MedicalRecord extends TitledFragment
 
     private void setMedicalRecordObserver()
     {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "setMedicalRecordObserver");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + ".setMedicalRecordObserver");
 
         this.medicalRecordObserver = new Observer()
         {
@@ -203,7 +113,7 @@ public class MedicalRecord extends TitledFragment
 
     private void initializeMedicalRecordContainer()
     {
-        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + "initializeMedicalRecordContainer");
+        Log.d(MedicalRecord.CLASSNAME, MedicalRecord.TAG + ".initializeMedicalRecordContainer");
 
         final RecyclerView recyclerView = (RecyclerView) this.container.findViewById(R.id.mainpage_viewpager_medical_record_recycler_container);
 

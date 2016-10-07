@@ -80,14 +80,6 @@ public class Diagnose extends TitledFragment
     //----------------------------------------------------------------------------------------------
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreate");
-
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onCreateView");
@@ -115,92 +107,12 @@ public class Diagnose extends TitledFragment
     }
 
     @Override
-    public void onAttach(Context context)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onAttach");
-
-        super.onAttach(context);
-    }
-
-    @Override
     public void onDestroyView()
     {
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroyView");
 
         this.resultDialog.dismiss();
         super.onDestroyView();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onActivityCreated");
-
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onStart");
-
-        super.onStart();
-    }
-
-    @Override
-    public void onResume()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onResume");
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onPause");
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onStop");
-
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onSaveInstanceState");
-
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onViewStateRestored");
-
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDestroy");
-
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach()
-    {
-        Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onDetach");
-
-        super.onDetach();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -341,7 +253,7 @@ public class Diagnose extends TitledFragment
         Log.d(Diagnose.CLASSNAME, Diagnose.TAG + ".onGoToTreatmentPressed");
 
         this.onDialogDismissPressed();
-        this.root.getViewPager().setCurrentItem(Treatment.ID);
+        this.root.getViewPager().setCurrentItem(this.user != null ? Treatment.ID_PRO : Treatment.ID_FREE);
     }
 
     public void onDialogDismissPressed()

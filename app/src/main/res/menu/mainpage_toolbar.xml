@@ -3,8 +3,13 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".controller.MainPage">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/mainpage_toolbar_menu_help"
+        android:orderInCategory="1"
+        android:title="@string/mainpage_toolbar_menu_help"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/mainpage_toolbar_menu_about_us"
+        android:orderInCategory="1"
+        android:title="@string/mainpage_toolbar_menu_about_us"
         app:showAsAction="never"/>
 </menu>

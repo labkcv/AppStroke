@@ -2,9 +2,11 @@ package id.ac.ub.filkom.sekcv.appstroke.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -34,6 +37,7 @@ import java.util.LinkedList;
 
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.adapter.MainPageContentAdapter;
+import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Chart;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Diagnose;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.Home;
 import id.ac.ub.filkom.sekcv.appstroke.controller.mainpage.viewpager.MedicalRecord;
@@ -57,7 +61,6 @@ public class MainPage extends AppCompatActivity
     public static final int    ID        = 0x100;
 
     private ViewPager              viewPager;
-    private MainPageContentAdapter pagerAdapter;
 
     private Entity_User                                user;
     private ObservableStroke                           stroke;
@@ -103,70 +106,20 @@ public class MainPage extends AppCompatActivity
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onOptionsItemSelected");
 
-        final int id = item.getItemId();
-
-        if(id == R.id.action_settings)
+        switch(item.getItemId())
         {
-            return true;
+            case R.id.mainpage_toolbar_menu_help:
+            {
+                this.onToolbarHelpMenuPressed();
+            }
+            break;
+            case R.id.mainpage_toolbar_menu_about_us:
+            {
+                this.onToolbarAboutUsMenuPressed();
+            }
+            break;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull final Bundle outState)
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onSaveInstanceState");
-
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull final Bundle savedInstanceState)
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onRestoreInstanceState");
-
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onStart()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onStart");
-
-        super.onStart();
-    }
-
-    @Override
-    protected void onRestart()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onRestart");
-
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onResume");
-
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onPause");
-
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onStop");
-
-        super.onStop();
     }
 
     @Override
@@ -177,6 +130,15 @@ public class MainPage extends AppCompatActivity
         this.isActivityReady = false;
         this.medicalRecordModel.close();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onBackPressed");
+
+        super.onBackPressed();
+        super.finish();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -245,12 +207,12 @@ public class MainPage extends AppCompatActivity
             }
             else
             {
-                Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_LONG).show();
             }
         }
         catch(PackageManager.NameNotFoundException e)
         {
-            Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, super.getResources().getString(R.string.mainpage_limited_mode), Toast.LENGTH_LONG).show();
         }
 
         this.updateActivityState();
@@ -265,8 +227,18 @@ public class MainPage extends AppCompatActivity
         final ActionBar actionBar = super.getSupportActionBar();
         if(actionBar != null)
         {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-            toolbar.setContentInsetStartWithNavigation(0);
+            toolbar.setContentInsetStartWithNavigation(4);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    MainPage.this.onBackPressed();
+                }
+            });
         }
     }
 
@@ -278,11 +250,24 @@ public class MainPage extends AppCompatActivity
         {
             case Configuration.ORIENTATION_PORTRAIT:
             {
-                this.pagerAdapter = new MainPageContentAdapter(super.getSupportFragmentManager(), 4);
-                this.pagerAdapter.addFragment(Home.newInstance("Home"));
-                this.pagerAdapter.addFragment(Diagnose.newInstance("Diagnose"));
-                this.pagerAdapter.addFragment(MedicalRecord.newInstance("Medical Record"));
-                this.pagerAdapter.addFragment(Treatment.newInstance("Treatment"));
+                final Resources        resources = super.getResources();
+                MainPageContentAdapter pagerAdapter;
+                if(this.user == null)
+                {
+                    pagerAdapter = new MainPageContentAdapter(super.getSupportFragmentManager(), 3);
+                    pagerAdapter.addFragment(Home.newInstance(resources.getString(R.string.mainpage_fragment_title_home)));
+                    pagerAdapter.addFragment(Diagnose.newInstance(resources.getString(R.string.mainpage_fragment_title_diagnose)));
+                    pagerAdapter.addFragment(Treatment.newInstance(resources.getString(R.string.mainpage_fragment_title_treatment)));
+                }
+                else
+                {
+                    pagerAdapter = new MainPageContentAdapter(super.getSupportFragmentManager(), 5);
+                    pagerAdapter.addFragment(Home.newInstance(resources.getString(R.string.mainpage_fragment_title_home)));
+                    pagerAdapter.addFragment(Diagnose.newInstance(resources.getString(R.string.mainpage_fragment_title_diagnose)));
+                    pagerAdapter.addFragment(MedicalRecord.newInstance(resources.getString(R.string.mainpage_fragment_title_medical_record)));
+                    pagerAdapter.addFragment(Chart.newInstance(resources.getString(R.string.mainpage_fragment_title_chart)));
+                    pagerAdapter.addFragment(Treatment.newInstance(resources.getString(R.string.mainpage_fragment_title_treatment)));
+                }
 
                 this.viewPager = (ViewPager) findViewById(R.id.viewpager);
                 this.viewPager.setAdapter(pagerAdapter);
@@ -291,10 +276,7 @@ public class MainPage extends AppCompatActivity
                 tabLayout.setupWithViewPager(this.viewPager);
 
                 Log.d(MainPage.CLASSNAME, MainPage.TAG + ".setActivity : PORTRAIT");
-            }
-            break;
-            case Configuration.ORIENTATION_LANDSCAPE:
-            {
+                break;
             }
         }
         this.viewPager.setCurrentItem(tabNumber);
@@ -303,6 +285,23 @@ public class MainPage extends AppCompatActivity
     //----------------------------------------------------------------------------------------------
     //---App User Function
     //----------------------------------------------------------------------------------------------
+
+    private void onToolbarHelpMenuPressed()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onToolbarHelpMenuPressed");
+
+        final Intent intent = new Intent(this, HelpPage.class);
+        intent.putExtra(HelpPage.IS_USER_LOGGED_IN, this.user != null);
+        super.startActivity(intent);
+    }
+
+    private void onToolbarAboutUsMenuPressed()
+    {
+        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onToolbarAboutUsMenuPressed");
+
+        final Intent intent = new Intent(this, AboutUsPage.class);
+        super.startActivity(intent);
+    }
 
     public ViewPager getViewPager()
     {
@@ -344,13 +343,6 @@ public class MainPage extends AppCompatActivity
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".updateStroke");
 
         this.stroke.updateStroke(parameter, metadata);
-    }
-
-    public MainPageContentAdapter getPagerAdapter()
-    {
-        Log.d(MainPage.CLASSNAME, MainPage.TAG + ".getPagerAdapter");
-
-        return this.pagerAdapter;
     }
 
     public ObservableLinkedList<Entity_MedicalRecord> getMedicalRecordData()
