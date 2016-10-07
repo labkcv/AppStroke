@@ -1,2 +1,3 @@
-include ':app', ':MaterialEditText'
-project(':MaterialEditText').projectDir = new File(settingsDir, '../MaterialEditText/library')
+include ':app', ':mte', ':chart'
+project(':mte').projectDir = new File(settingsDir, '../MaterialEditText/library')
+project(':chart').projectDir = new File(settingsDir, '../MPAndroidChart/MPChartLib')
