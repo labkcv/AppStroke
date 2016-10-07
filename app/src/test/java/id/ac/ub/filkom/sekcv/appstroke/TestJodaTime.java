@@ -1,8 +1,10 @@
 package id.ac.ub.filkom.sekcv.appstroke;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
@@ -46,5 +48,23 @@ public class TestJodaTime
             ++age;
         }
         System.out.println("ageNow              = " + age);
+    }
+
+    @Test public void testDateOperator()
+    {
+        DateTime d = DateTime.now();
+        System.out.println(d);
+        d.plusHours(2);
+        System.out.println(d);
+        DateTime e = d.plusHours(3);
+        System.out.println(e);
+    }
+
+    @Test public void testMinutesBetween()
+    {
+        DateTime s = DateTime.now();
+        DateTime e = s.plusHours(3);
+        System.out.println(Minutes.minutesBetween(s, e));
+        System.out.println(Minutes.minutesBetween(e, s));
     }
 }
