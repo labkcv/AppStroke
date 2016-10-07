@@ -1,5 +1,7 @@
 package id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component;
 
+import android.graphics.Color;
+
 /**
  * This <AppStroke> project in package <id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component> created by :
  * Name         : syafiq
@@ -9,11 +11,11 @@ package id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component;
  */
 public enum Parameter
 {
-    AGE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("age", "Age")),
-    CHOLESTEROL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("cholesterol", "Cholesterol")),
-    HDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("hdl", "HDL")),
-    LDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("ldl", "LDL")),
-    TRIGLYCERIDE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("triglyceride", "Triglyceride"));
+    AGE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("age", "Age", Color.parseColor("#8BC34A"))),
+    CHOLESTEROL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("cholesterol", "Cholesterol", Color.parseColor("#E91E63"))),
+    HDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("hdl", "HDL", Color.parseColor("#3F51B5"))),
+    LDL(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("ldl", "LDL", Color.parseColor("#00BCD4"))),
+    TRIGLYCERIDE(new id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter("triglyceride", "Triglyceride", Color.parseColor("#FFC107")));
 
     private final id.ac.ub.filkom.sekcv.appstroke.model.dataset.Parameter parameter;
 
