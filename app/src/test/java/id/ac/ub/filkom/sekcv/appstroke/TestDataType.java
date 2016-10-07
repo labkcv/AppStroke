@@ -15,7 +15,7 @@ public class TestDataType
     @Test
     public void testHighFloatIncrement()
     {
-        for(double i = 24594196, is = i + 10; ++i < is;)
+        for(double i = 24594196, is = i + 10; ++i < is; )
         {
             System.out.println(i);
         }

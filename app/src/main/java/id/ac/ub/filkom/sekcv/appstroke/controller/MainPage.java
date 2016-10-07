@@ -106,18 +106,14 @@ public class MainPage extends AppCompatActivity
     {
         Log.d(MainPage.CLASSNAME, MainPage.TAG + ".onOptionsItemSelected");
 
-        switch(item.getItemId())
+        final int cItem = item.getItemId();
+        if(cItem == R.id.mainpage_toolbar_menu_help)
         {
-            case R.id.mainpage_toolbar_menu_help:
-            {
-                this.onToolbarHelpMenuPressed();
-            }
-            break;
-            case R.id.mainpage_toolbar_menu_about_us:
-            {
-                this.onToolbarAboutUsMenuPressed();
-            }
-            break;
+            this.onToolbarHelpMenuPressed();
+        }
+        else if(cItem == R.id.mainpage_toolbar_menu_about_us)
+        {
+            this.onToolbarAboutUsMenuPressed();
         }
         return super.onOptionsItemSelected(item);
     }

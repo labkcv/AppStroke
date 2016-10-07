@@ -50,7 +50,8 @@ public class TestJodaTime
         System.out.println("ageNow              = " + age);
     }
 
-    @Test public void testDateOperator()
+    @Test
+    public void testDateOperator()
     {
         DateTime d = DateTime.now();
         System.out.println(d);
@@ -60,7 +61,8 @@ public class TestJodaTime
         System.out.println(e);
     }
 
-    @Test public void testMinutesBetween()
+    @Test
+    public void testMinutesBetween()
     {
         DateTime s = DateTime.now();
         DateTime e = s.plusHours(3);
