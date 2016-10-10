@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@color/colorAccent">
+                    android:background="@color/appstroke_colorAccent">
                 </RelativeLayout>
             </LinearLayout>
 
@@ -61,7 +61,7 @@
                 app:met_helperTextColor="@color/custom_material_grey_600"
                 app:met_maxCharacters="3"
                 app:met_minCharacters="1"
-                app:met_underlineColor="@color/colorPrimary"/>
+                app:met_underlineColor="@color/appstroke_colorPrimary"/>
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -82,7 +82,7 @@
                 app:met_helperTextColor="@color/custom_material_grey_600"
                 app:met_maxCharacters="3"
                 app:met_minCharacters="1"
-                app:met_underlineColor="@color/colorPrimary"/>
+                app:met_underlineColor="@color/appstroke_colorPrimary"/>
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -103,7 +103,7 @@
                 app:met_helperTextColor="@color/custom_material_grey_600"
                 app:met_maxCharacters="3"
                 app:met_minCharacters="1"
-                app:met_underlineColor="@color/colorPrimary"/>
+                app:met_underlineColor="@color/appstroke_colorPrimary"/>
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -124,7 +124,7 @@
                 app:met_helperTextColor="@color/custom_material_grey_600"
                 app:met_maxCharacters="3"
                 app:met_minCharacters="1"
-                app:met_underlineColor="@color/colorPrimary"/>
+                app:met_underlineColor="@color/appstroke_colorPrimary"/>
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -145,7 +145,7 @@
                 app:met_helperTextColor="@color/custom_material_grey_600"
                 app:met_maxCharacters="3"
                 app:met_minCharacters="1"
-                app:met_underlineColor="@color/colorPrimary"/>
+                app:met_underlineColor="@color/appstroke_colorPrimary"/>
 
 
             <android.support.v7.widget.AppCompatButton
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/appstroke_colorPrimary"
                 android:padding="12dp"
                 android:text="@string/mainpage_viewpager_diagnose_button_submit"
                 android:textColor="@color/custom_material_grey_300"/>

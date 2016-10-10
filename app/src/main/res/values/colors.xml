@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#FF303F9F</color>
+    <color name="appstroke_colorPrimary">#2196F3</color>
+    <color name="appstroke_colorPrimaryDark">#FF303F9F</color>
     <color name="colorPrimaryTemp">#FF3F51B5</color>
     <color name="colorPrimaryDarkTemp">#FF303F9F</color>
-    <color name="colorAccent">#FFFF4081</color>
+    <color name="appstroke_colorAccent">#FFFF4081</color>
     <color name="white">#ffffff</color>
     <color name="primary">#2196F3</color>
     <color name="transparent">#00000000</color>
