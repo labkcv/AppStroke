@@ -159,7 +159,7 @@ public class Chart extends TitledFragment
         xAxis.setTextColor(Color.WHITE);
         xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(true);
-        xAxis.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorAccent));
+        xAxis.setTextColor(ContextCompat.getColor(this.getContext(), R.color.appstroke_colorAccent));
         xAxis.setCenterAxisLabels(true);
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new IAxisValueFormatter()
@@ -185,7 +185,7 @@ public class Chart extends TitledFragment
         leftAxis.setAxisMinimum(0f);
         leftAxis.setAxisMaximum(1000f);
         leftAxis.setYOffset(-9f);
-        leftAxis.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorAccent));
+        leftAxis.setTextColor(ContextCompat.getColor(this.getContext(), R.color.appstroke_colorAccent));
 
         YAxis rightAxis = this.chart.getAxisRight();
         rightAxis.setEnabled(false);
