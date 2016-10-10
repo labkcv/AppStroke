@@ -21,21 +21,17 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.TimeUnit;
 
 import id.ac.ub.filkom.sekcv.appstroke.R;
 import id.ac.ub.filkom.sekcv.appstroke.controller.MainPage;
 import id.ac.ub.filkom.sekcv.appstroke.model.algorithm.svm.core.component.Parameter;
 import id.ac.ub.filkom.sekcv.appstroke.model.custom.android.support.v4.app.TitledFragment;
-import id.ac.ub.filkom.sekcv.appstroke.model.db.core.DatabaseHelper;
 import id.ac.ub.filkom.sekcv.appstroke.model.db.entity.Entity_MedicalRecord;
 import id.ac.ub.filkom.sekcv.appstroke.model.util.TaskDelegatable;
 
@@ -118,6 +114,21 @@ public class Chart extends TitledFragment
             @Override
             public void update(Observable observable, Object o)
             {
+                new AsyncTask<Void, Void, Void>()
+                {
+                    @Override
+                    protected Void doInBackground(Void... params)
+                    {
+                        Chart.this.setChartData();
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid)
+                    {
+                        Chart.this.chart.invalidate();
+                    }
+                }.execute();
             }
         };
     }
@@ -145,6 +156,13 @@ public class Chart extends TitledFragment
         this.chart.setBackgroundColor(Color.WHITE);
         this.chart.setViewPortOffsets(0f, 0f, 0f, 0f);
 
+        // initialize chart data
+        this.chartData = new ArrayList<>(Parameter.values().length - 1);
+        for(int i = -1, is = Parameter.values().length - 1; ++i < is; )
+        {
+            this.chartData.add(new ArrayList<Entry>());
+        }
+
         // add data
         this.setChartData();
         this.chart.invalidate();
@@ -154,9 +172,9 @@ public class Chart extends TitledFragment
         l.setEnabled(true);
 
         XAxis xAxis = this.chart.getXAxis();
+        xAxis.setEnabled(false);
         xAxis.setPosition(XAxis.XAxisPosition.TOP_INSIDE);
         xAxis.setTextSize(10f);
-        xAxis.setTextColor(Color.WHITE);
         xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(true);
         xAxis.setTextColor(ContextCompat.getColor(this.getContext(), R.color.appstroke_colorAccent));
@@ -167,7 +185,8 @@ public class Chart extends TitledFragment
             @Override
             public String getFormattedValue(float value, AxisBase axis)
             {
-                return new DateTime((long) value).toString(DatabaseHelper.TIMESTAMP_FORMAT);
+                //return new DateTime((long) value).toString("mm:ss");
+                return "";
             }
 
             @Override
@@ -193,10 +212,9 @@ public class Chart extends TitledFragment
 
     private void setChartData()
     {
-        this.chartData = new ArrayList<>(Parameter.values().length - 1);
-        for(int i = -1, is = Parameter.values().length - 1; ++i < is; )
+        for(final ArrayList<Entry> chartData : this.chartData)
         {
-            this.chartData.add(new ArrayList<Entry>());
+            chartData.clear();
         }
 
         final LinkedList<Entity_MedicalRecord> entity = this.root.getMedicalRecordData().getLists();
@@ -204,7 +222,7 @@ public class Chart extends TitledFragment
         for(Iterator<Entity_MedicalRecord> i = entity.descendingIterator(); i.hasNext(); )
         {
             final Entity_MedicalRecord data = i.next();
-            float                      x    = (float) TimeUnit.MILLISECONDS.toSeconds(data.getTime().getMillis());
+            float                      x    = (float) data.getTime().getMillis();
             this.chartData.get(Parameter.CHOLESTEROL.ordinal() - 1).add(new Entry(x, (float) data.getCholesterol()));
             this.chartData.get(Parameter.HDL.ordinal() - 1).add(new Entry(x, (float) data.getHdl()));
             this.chartData.get(Parameter.LDL.ordinal() - 1).add(new Entry(x, (float) data.getLdl()));
@@ -233,12 +251,16 @@ public class Chart extends TitledFragment
             set.setColor(param.getColor());
             set.setValueTextColor(param.getColor());
             set.setLineWidth(1.5f);
-            set.setDrawCircles(false);
+            set.setDrawCircles(true);
+            set.setCircleRadius(3f);
+            set.setCircleColor(ContextCompat.getColor(this.root, R.color.appstroke_colorPrimaryDark));
+            set.setDrawCircleHole(true);
+            set.setCircleHoleRadius(1.5f);
+            set.setCircleColorHole(ContextCompat.getColor(this.root, R.color.appstroke_colorPrimary));
             set.setDrawValues(false);
+            set.setFillColor(ContextCompat.getColor(this.root, R.color.appstroke_colorPrimary));
             set.setFillAlpha(65);
-            set.setFillColor(ColorTemplate.getHoloBlue());
             set.setHighLightColor(Color.rgb(244, 117, 117));
-            set.setDrawCircleHole(false);
             data.addDataSet(set);
         }
 
