@@ -22,7 +22,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dummy_text_1_paragraph"
+        android:text="@string/mainpage_viewpager_treatment_status_1_content"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/mainpage_viewpager_treatment_status_1_content_source"
+        android:textColor="@color/custom_material_grey_400"/>
 
 </LinearLayout>
