@@ -37,6 +37,13 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:text="@string/mainpage_viewpager_home_disease_description"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/mainpage_viewpager_home_disease_description_source"
+                android:textColor="@color/custom_material_grey_400"/>
         </LinearLayout>
     </ScrollView>
 
