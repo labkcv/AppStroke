@@ -93,4 +93,5 @@ Alkohol juga merupakan pantangan penderita Stroke, karena alkohol dapat mempenga
     <string name="mainpage_viewpager_treatment_status_1_content_source" translatable="false">http://grosiramazonplus.com</string>
     <string name="mainpage_viewpager_treatment_status_0_content_source" translatable="false">http://grosiramazonplus.com</string>
     <string name="mainpage_viewpager_treatment_status_2_content_source" translatable="false">http://grosiramazonplus.com</string>
+    <string name="mainpage_viewpager_home_disease_description_source" translatable="false">http://gejalastroke.com</string>
 </resources>
